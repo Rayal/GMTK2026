@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ba0k8qtlvgvh6"]
+
+[ext_resource type="PackedScene" uid="uid://3k4r6xh2payf" path="res://prefabs/player.tscn" id="1_hd1c1"]
+[ext_resource type="PackedScene" uid="uid://m80m2q35ndn0" path="res://prefabs/terrain.tscn" id="2_c7jcs"]
+
+[node name="Node2D" type="Node2D" unique_id=1973393689]
+
+[node name="Terrain" parent="." unique_id=979663302 instance=ExtResource("2_c7jcs")]
+
+[node name="Player" parent="." unique_id=155794638 instance=ExtResource("1_hd1c1")]
+position = Vector2(124.99999, 68.99999)

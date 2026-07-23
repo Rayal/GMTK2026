@@ -1,18 +1,27 @@
 extends Area2D
 
+@export var beacon_asset_path: String
+
 @export var base_speed: int = 400
 @export var speed: int
+
+@export var life_time_sec: int = 100
+
 var screen_size
+var beacon_resource: Resource
+var new_player: bool = true;
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
+	beacon_resource = load(beacon_asset_path)
+	
 	speed = base_speed
 	$AnimatedSprite2D.play()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func process_movement(delta: float) -> void:
 	var velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
@@ -40,3 +49,14 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.animation = "walk_back"
 	else:
 		$AnimatedSprite2D.animation = "idle" + $AnimatedSprite2D.animation.erase(0, 4)
+
+
+func _process(delta: float) -> void:
+	if new_player and Input.is_anything_pressed():
+		new_player = false
+	process_movement(delta)
+	
+	if Input.is_action_just_pressed("place_beacon"):
+		var beacon = beacon_resource.instantiate()
+		beacon.position = position
+		get_parent().add_child(beacon)

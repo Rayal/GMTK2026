@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://duhr752p1wvit"]
+
+[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="1_2nbyu"]
+[ext_resource type="Script" uid="uid://rscmddrlsx35" path="res://scripts/beacon.gd" id="2_6culc"]
+
+[node name="Beacon" type="Area2D" unique_id=1438186413]
+scale = Vector2(5, 5)
+script = ExtResource("2_6culc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=190760159]
+texture_filter = 1
+texture = ExtResource("1_2nbyu")
+region_enabled = true
+region_rect = Rect2(115, 595, 10, 12)
