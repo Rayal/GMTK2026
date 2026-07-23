@@ -24,10 +24,11 @@ func create_terrain():
 	for x in range(width):
 		for y in range(height):
 			var n2d = noise.get_noise_2d(x * noise_scale, y * noise_scale)
-			#terrain.get_cell_tile_data(Vector2i(x,y)).set_custom_data("height", n2d)
 			if n2d < water_height:
-				terrain.set_cell(Vector2i(x,y), 0, Vector2i(8, 11))
+				terrain.set_cell(Vector2i(x,y), 2, Vector2i(8, 11))
 			elif n2d < plains_height and n2d >= water_height:
-				terrain.set_cell(Vector2i(x,y), 0, Vector2i(1, 1))
+				terrain.set_cell(Vector2i(x,y), 2, Vector2i(1, 1))
 			else:
-				terrain.set_cell(Vector2i(x,y), 0, Vector2i(0, 5))
+				terrain.set_cell(Vector2i(x,y), 2, Vector2i(0, 5))
+				
+			terrain.get_cell_tile_data(Vector2i(x,y)).set_custom_data("height", n2d)

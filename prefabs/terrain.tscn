@@ -1,15 +1,15 @@
 [gd_scene format=4 uid="uid://m80m2q35ndn0"]
 
-[ext_resource type="Script" uid="uid://crcg4h5hcms0" path="res://terrain_generation.gd" id="1_0u6kl"]
-[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://terrain/punyworld-overworld-tileset.png" id="2_avahw"]
-[ext_resource type="Script" uid="uid://ca02dsrqo0mtm" path="res://camera_debug.gd" id="3_avahw"]
+[ext_resource type="Script" uid="uid://crcg4h5hcms0" path="res://scripts/terrain_generation.gd" id="1_sjdqh"]
+[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="2_sjdqh"]
+[ext_resource type="Script" uid="uid://ca02dsrqo0mtm" path="res://temp_assets/camera_debug.gd" id="3_wr12m"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0u6kl"]
 noise_type = 3
 frequency = 0.1222
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n7k1k"]
-texture = ExtResource("2_avahw")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sjdqh"]
+texture = ExtResource("2_sjdqh")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -35,6 +35,7 @@ texture = ExtResource("2_avahw")
 26:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:1/0 = 0
 3:1/0 = 0
 4:1/0 = 0
@@ -109,6 +110,7 @@ texture = ExtResource("2_avahw")
 21:4/0 = 0
 22:4/0 = 0
 0:5/0 = 0
+0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:5/0 = 0
 2:5/0 = 0
 3:5/0 = 0
@@ -229,6 +231,7 @@ texture = ExtResource("2_avahw")
 6:11/0 = 0
 7:11/0 = 0
 8:11/0 = 0
+8:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 9:11/0 = 0
 10:11/0 = 0
 11:11/0 = 0
@@ -705,18 +708,17 @@ texture = ExtResource("2_avahw")
 17:37/0 = 0
 18:37/0 = 0
 19:37/0 = 0
-26:29/0 = 0
-26:30/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_pkldr"]
+physics_layer_0/collision_layer = 1
 custom_data_layer_0/name = "height"
 custom_data_layer_0/type = 3
-sources/0 = SubResource("TileSetAtlasSource_n7k1k")
+sources/2 = SubResource("TileSetAtlasSource_sjdqh")
 
 [node name="Terrain" type="Node2D" unique_id=979663302]
 
 [node name="TerrainGeneration" type="Node2D" parent="." unique_id=1465908473 node_paths=PackedStringArray("terrain")]
-script = ExtResource("1_0u6kl")
+script = ExtResource("1_sjdqh")
 noise = SubResource("FastNoiseLite_0u6kl")
 terrain = NodePath("../TileMapLayer")
 
@@ -727,4 +729,4 @@ tile_set = SubResource("TileSet_pkldr")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1744947073]
 position = Vector2(574, 324)
-script = ExtResource("3_avahw")
+script = ExtResource("3_wr12m")
