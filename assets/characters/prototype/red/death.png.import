@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cti6bd6wma3rf"
-path="res://.godot/imported/punyworld-overworld-tileset.png-16c27dc999520bcde3d36bb5336b09d0.ctex"
+uid="uid://bekbtd6sxlrak"
+path="res://.godot/imported/death.png-92b209d6aaccc7e733afb8b2bf8153a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://terrain/punyworld-overworld-tileset.png"
-dest_files=["res://.godot/imported/punyworld-overworld-tileset.png-16c27dc999520bcde3d36bb5336b09d0.ctex"]
+source_file="res://assets/characters/prototype/red/death.png"
+dest_files=["res://.godot/imported/death.png-92b209d6aaccc7e733afb8b2bf8153a6.ctex"]
 
 [params]
 

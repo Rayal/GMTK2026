@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d030uduu7t0uo"]
+
+[ext_resource type="Script" uid="uid://bpmqvifj6g1bo" path="res://scripts/land_tile.gd" id="1_hndye"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rk2s5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rk2s5"]
+size = Vector2(1.0000002, 1.0000001)
+
+[node name="LandTile" type="Area2D" unique_id=774997609]
+scale = Vector2(80, 80)
+script = ExtResource("1_hndye")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=825505935]
+texture = SubResource("PlaceholderTexture2D_rk2s5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=426235816]
+position = Vector2(1.1920927e-08, 1.788139e-08)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_rk2s5")
