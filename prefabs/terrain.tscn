@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://crcg4h5hcms0" path="res://scripts/terrain_generation.gd" id="1_sjdqh"]
 [ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="2_sjdqh"]
-[ext_resource type="Script" uid="uid://ca02dsrqo0mtm" path="res://temp_assets/camera_debug.gd" id="3_wr12m"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0u6kl"]
 noise_type = 3
@@ -723,10 +722,11 @@ noise = SubResource("FastNoiseLite_0u6kl")
 terrain = NodePath("../TileMapLayer")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1976135898]
+texture_filter = 1
 position = Vector2(-1, 1)
+scale = Vector2(5, 5)
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAADAAUAAAABAAEAAAADAAUAAAAAAAEAAAADAAUAAAACAAEAAAAIAAcAAAACAAIAAAAAAAAAAAADAAIAAAACAAYAAAADAAEAAAAIAAcAAAADAAAAAAAIAAcAAAACAAAAAAAIAAcAAAABAAIAAAAOAAYAAAAAAAIAAAADAAYAAAA=")
 tile_set = SubResource("TileSet_pkldr")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1744947073]
 position = Vector2(574, 324)
-script = ExtResource("3_wr12m")
