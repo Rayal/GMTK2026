@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bwexpct2taheo"]
+
+[ext_resource type="PackedScene" uid="uid://d030uduu7t0uo" path="res://prefabs/land_tile.tscn" id="1_lj2is"]
+[ext_resource type="PackedScene" uid="uid://3k4r6xh2payf" path="res://prefabs/player.tscn" id="2_egpak"]
+
+[node name="Node2D" type="Node2D" unique_id=1971561784]
+
+[node name="LandTilePlaceholder" parent="." unique_id=774997609 instance=ExtResource("1_lj2is")]
+position = Vector2(447.99997, 159.99998)
+
+[node name="LandTilePlaceholder2" parent="." unique_id=577093979 instance=ExtResource("1_lj2is")]
+position = Vector2(528, 159.99998)
+
+[node name="LandTilePlaceholder3" parent="." unique_id=1641822247 instance=ExtResource("1_lj2is")]
+position = Vector2(447.99997, 239.99998)
+
+[node name="LandTilePlaceholder4" parent="." unique_id=231560245 instance=ExtResource("1_lj2is")]
+position = Vector2(528, 239.99998)
+
+[node name="Player" parent="." unique_id=155794638 instance=ExtResource("2_egpak")]
+position = Vector2(448, 160)
+speed = null
