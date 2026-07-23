@@ -6,6 +6,10 @@
 [node name="Node2D" type="Node2D" unique_id=1973393689]
 
 [node name="Terrain" parent="." unique_id=979663302 instance=ExtResource("2_c7jcs")]
+width = 10
+height = 10
+noise_scale = 0.3
+water_height = -0.05
 
 [node name="Player" parent="." unique_id=155794638 instance=ExtResource("1_hd1c1")]
 position = Vector2(124.99999, 68.99999)
