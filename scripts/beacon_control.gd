@@ -11,12 +11,15 @@ var beacons: Dictionary[int, Beacon] = {}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	beacon_resource = load(beacon_asset_path)
-
+	update_label()
 
 func _on_new_beacon_request() -> void:
 	var beacon = beacon_resource.instantiate()
 	beacon.id = beacon_number
 	beacons[beacon.id] = beacon
-	get_parent().add_child(beacon)
 	new_beacon.emit(beacon)
 	beacon_number += 1
+	update_label()
+
+func update_label():
+	$Label.text = "Beacons Placed: " + str(beacon_number)
