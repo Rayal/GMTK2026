@@ -1,4 +1,13 @@
-extends Camera2D
+extends Node2D
+
+signal beacon_number(beacons: int)
+
+var beacons: Array[Beacon] = []
+
+
+func add_beacon(new_beacon: Beacon) -> void:
+	beacons.append(new_beacon)
+	beacon_number.emit(beacons.size())
 
 
 # Called when the node enters the scene tree for the first time.

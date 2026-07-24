@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var beacon_asset_path: String
+signal new_beacon_request
 
 @export var base_speed: int = 400
 @export var speed: int
@@ -10,26 +10,20 @@ extends Area2D
 var screen_size
 var size: Vector2
 
-var beacon_resource: Resource
+
 var new_player: bool = true;
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	size = $CollisionShape2D.shape.get_rect().size
-	beacon_resource = load(beacon_asset_path)
-	
+		
 	speed = base_speed
 	$AnimatedSprite2D.play()
 
 
 func process_movement(delta: float) -> void:
 	var velocity = Vector2.ZERO
-	if (Input.is_action_just_released("move_down") or 
-		Input.is_action_just_released("move_up") or 
-		Input.is_action_just_released("move_left") or 
-		Input.is_action_just_released("move_right")):
-			print(position, screen_size)
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
@@ -64,9 +58,7 @@ func _process(delta: float) -> void:
 	process_movement(delta)
 	
 	if Input.is_action_just_pressed("place_beacon"):
-		var beacon = beacon_resource.instantiate()
-		beacon.position = position
-		get_parent().add_child(beacon)
+		new_beacon_request.emit()
 
 
 func _on_terrain_terrain_limits(top_left: Vector2, bottom_right: Vector2) -> void:
@@ -76,3 +68,7 @@ func _on_terrain_terrain_limits(top_left: Vector2, bottom_right: Vector2) -> voi
 	$Camera2D.limit_left = top_left.x
 	$Camera2D.limit_top = top_left.y
 	
+
+
+func _on_new_beacon(beacon: Beacon) -> void:
+	beacon.position = position
