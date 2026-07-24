@@ -207,7 +207,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kbsxf")
 }],
-"loop": 0,
+"loop": 1,
 "name": &"idle_side",
 "speed": 2.0
 }, {
@@ -277,7 +277,7 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1959791541]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_rk2s5")
-animation = &"idle_front"
+animation = &"idle_back"
 autoplay = "idle_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=680853989]
@@ -294,3 +294,7 @@ label_settings = SubResource("LabelSettings_rk2s5")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=482704724]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal terrain_limits(top_left: Vector2, bottom_right: Vector2)
+
 var rng = RandomNumberGenerator.new()
 
 @export var noise = FastNoiseLite.new()
@@ -14,6 +16,7 @@ var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	create_terrain()
+	emit_limit()
 
 func generate_seed():
 	noise.seed = rng.randi()
@@ -32,3 +35,12 @@ func create_terrain():
 				terrain.set_cell(Vector2i(x,y), 2, Vector2i(0, 5))
 				
 			terrain.get_cell_tile_data(Vector2i(x,y)).set_custom_data("height", n2d)
+			
+func emit_limit():
+	var rect = terrain.get_used_rect()
+	var cell_size = terrain.tile_set.tile_size
+	var top_left: Vector2 = terrain.to_global(rect.position * cell_size)
+	var bottom_right: Vector2 = terrain.to_global(rect.end * cell_size)
+	print(top_left)
+	print(bottom_right)
+	terrain_limits.emit(top_left, bottom_right)

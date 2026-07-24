@@ -9,3 +9,5 @@
 
 [node name="Player" parent="." unique_id=155794638 instance=ExtResource("1_hd1c1")]
 position = Vector2(124.99999, 68.99999)
+
+[connection signal="terrain_limits" from="Terrain" to="Player" method="_on_terrain_terrain_limits"]
