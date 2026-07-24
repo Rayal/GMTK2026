@@ -1,5 +1,6 @@
 extends Control
 
+@export var game_scene: String
 
 func _on_start_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/test_scene_1.tscn")
+	get_tree().change_scene_to_file(game_scene)

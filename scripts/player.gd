@@ -89,10 +89,13 @@ func _process(delta: float) -> void:
 
 
 func player_death():
-	$AnimatedSprite2D.animation = "die" + $AnimatedSprite2D.animation.erase(0, 4)
 	player_dead = true
+	$AnimatedSprite2D.animation = "die" + $AnimatedSprite2D.animation.erase(0, 4)
+	$AnimatedSprite2D.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
+
+
+func _on_death_animation_finished() -> void:
 	player_died.emit()
-	print("Player died!")
 
 
 func _on_terrain_terrain_limits(top_left: Vector2, bottom_right: Vector2) -> void:

@@ -1,8 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bdt2g73l48cbv"]
 
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_mnu"]
+[ext_resource type="Script" uid="uid://oi2g7pevxen1" path="res://scripts/main_menu.gd" id="1_mnu"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1386742076]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,8 +10,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mnu")
+game_scene = "res://scenes/test_scene_1.tscn"
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2115953639]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,16 +20,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=934943324]
 layout_mode = 2
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=2113367408]
 layout_mode = 2
-horizontal_alignment = 1
 text = "GMTK2026"
+horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1432095816]
 layout_mode = 2
 text = "Start"
 
