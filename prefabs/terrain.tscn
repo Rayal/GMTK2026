@@ -3,9 +3,7 @@
 [ext_resource type="Script" uid="uid://crcg4h5hcms0" path="res://scripts/terrain_generation.gd" id="1_sjdqh"]
 [ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="2_sjdqh"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0u6kl"]
-noise_type = 3
-frequency = 0.1222
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nkjy7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sjdqh"]
 texture = ExtResource("2_sjdqh")
@@ -714,12 +712,10 @@ custom_data_layer_0/name = "height"
 custom_data_layer_0/type = 3
 sources/2 = SubResource("TileSetAtlasSource_sjdqh")
 
-[node name="Terrain" type="Node2D" unique_id=979663302]
-
-[node name="TerrainGeneration" type="Node2D" parent="." unique_id=1465908473 node_paths=PackedStringArray("terrain")]
+[node name="Terrain" type="Node2D" unique_id=979663302 node_paths=PackedStringArray("terrain")]
 script = ExtResource("1_sjdqh")
-noise = SubResource("FastNoiseLite_0u6kl")
-terrain = NodePath("../TileMapLayer")
+noise = SubResource("FastNoiseLite_nkjy7")
+terrain = NodePath("TileMapLayer")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1976135898]
 texture_filter = 1
@@ -727,6 +723,3 @@ position = Vector2(-1, 1)
 scale = Vector2(5, 5)
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAADAAUAAAABAAEAAAADAAUAAAAAAAEAAAADAAUAAAACAAEAAAAIAAcAAAACAAIAAAAAAAAAAAADAAIAAAACAAYAAAADAAEAAAAIAAcAAAADAAAAAAAIAAcAAAACAAAAAAAIAAcAAAABAAIAAAAOAAYAAAAAAAIAAAADAAYAAAA=")
 tile_set = SubResource("TileSet_pkldr")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1744947073]
-position = Vector2(574, 324)
