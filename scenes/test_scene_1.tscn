@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bvb7ok4s7w6mp" path="res://scripts/beacon_control.gd" id="3_c7jcs"]
 [ext_resource type="FontFile" uid="uid://c21bi8ui0tqoa" path="res://fonts/yoster.ttf" id="4_ohw3e"]
 [ext_resource type="Script" uid="uid://cowmvm71rw8r1" path="res://scripts/time_label.gd" id="5_q6dig"]
+[ext_resource type="Script" path="res://scripts/game_scene.gd" id="6_gmscn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c7jcs"]
 font = ExtResource("4_ohw3e")
@@ -21,6 +22,7 @@ shadow_size = 3
 shadow_color = Color(0, 0, 0, 0.9411765)
 
 [node name="GameScene" type="Node2D" unique_id=1973393689]
+script = ExtResource("6_gmscn")
 
 [node name="Terrain" parent="." unique_id=979663302 instance=ExtResource("2_c7jcs")]
 
@@ -57,6 +59,18 @@ offset_bottom = 23.0
 text = "Time Left: 100"
 label_settings = SubResource("LabelSettings_ohw3e")
 
+[node name="DeathDialog" type="ConfirmationDialog" parent="." unique_id=2854001122]
+process_mode = 3
+title = "Time's Up"
+initial_position = 1
+size = Vector2i(300, 100)
+dialog_text = "Your play time has run out."
+ok_button_text = "Restart"
+cancel_button_text = "Quit"
+
 [connection signal="terrain_limits" from="Terrain" to="Player" method="_on_terrain_terrain_limits"]
 [connection signal="new_beacon_request" from="Player" to="HUD/BeaconControl" method="_on_new_beacon_request"]
 [connection signal="new_beacon" from="HUD/BeaconControl" to="Player" method="_on_new_beacon"]
+[connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[connection signal="confirmed" from="DeathDialog" to="." method="_on_death_dialog_confirmed"]
+[connection signal="canceled" from="DeathDialog" to="." method="_on_death_dialog_canceled"]
