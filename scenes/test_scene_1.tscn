@@ -2,12 +2,76 @@
 
 [ext_resource type="PackedScene" uid="uid://3k4r6xh2payf" path="res://prefabs/player.tscn" id="1_hd1c1"]
 [ext_resource type="PackedScene" uid="uid://m80m2q35ndn0" path="res://prefabs/terrain.tscn" id="2_c7jcs"]
+[ext_resource type="Script" uid="uid://bvb7ok4s7w6mp" path="res://scripts/beacon_control.gd" id="3_c7jcs"]
+[ext_resource type="FontFile" uid="uid://c21bi8ui0tqoa" path="res://fonts/yoster.ttf" id="4_ohw3e"]
+[ext_resource type="Script" uid="uid://cowmvm71rw8r1" path="res://scripts/time_label.gd" id="5_q6dig"]
+[ext_resource type="Script" uid="uid://dnx20tvep8n1t" path="res://scripts/game_scene.gd" id="6_gmscn"]
 
-[node name="Node2D" type="Node2D" unique_id=1973393689]
+[sub_resource type="LabelSettings" id="LabelSettings_c7jcs"]
+font = ExtResource("4_ohw3e")
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.9411765)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ohw3e"]
+font = ExtResource("4_ohw3e")
+outline_size = 1
+outline_color = Color(0.011764706, 0.011764706, 0.011764706, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.9411765)
+
+[node name="GameScene" type="Node2D" unique_id=1973393689]
+script = ExtResource("6_gmscn")
 
 [node name="Terrain" parent="." unique_id=979663302 instance=ExtResource("2_c7jcs")]
 
 [node name="Player" parent="." unique_id=155794638 instance=ExtResource("1_hd1c1")]
 position = Vector2(124.99999, 68.99999)
+life_time_sec = 10
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=508246576]
+
+[node name="BeaconControl" type="Node2D" parent="HUD" unique_id=32827916]
+texture_filter = 1
+position = Vector2(0, 35)
+scale = Vector2(2, 2)
+script = ExtResource("3_c7jcs")
+beacon_asset_path = "res://prefabs/beacon.tscn"
+
+[node name="Label" type="Label" parent="HUD/BeaconControl" unique_id=2043438434]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Beacons Placed: 0"
+label_settings = SubResource("LabelSettings_c7jcs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeLabel" type="Node2D" parent="HUD" unique_id=1992800703]
+texture_filter = 1
+scale = Vector2(2, 2)
+script = ExtResource("5_q6dig")
+
+[node name="Label" type="Label" parent="HUD/TimeLabel" unique_id=2069390969]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Time Left: 100"
+label_settings = SubResource("LabelSettings_ohw3e")
+
+[node name="DeathDialog" type="ConfirmationDialog" parent="." unique_id=-1440966174]
+process_mode = 3
+title = "Time's Up"
+initial_position = 1
+size = Vector2i(300, 100)
+ok_button_text = "Restart"
+dialog_text = "Your play time has run out."
+cancel_button_text = "Quit"
 
 [connection signal="terrain_limits" from="Terrain" to="Player" method="_on_terrain_terrain_limits"]
+[connection signal="new_beacon_request" from="Player" to="HUD/BeaconControl" method="_on_new_beacon_request"]
+[connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
+[connection signal="new_beacon" from="HUD/BeaconControl" to="Player" method="_on_new_beacon"]
+[connection signal="canceled" from="DeathDialog" to="." method="_on_death_dialog_canceled"]
+[connection signal="confirmed" from="DeathDialog" to="." method="_on_death_dialog_confirmed"]
