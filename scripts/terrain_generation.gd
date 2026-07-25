@@ -46,9 +46,30 @@ func emit_limit():
 
 func create_objects_on_terrain():
 	
-	for i in range(5):
-		var terrain_feature = terrain_objects.get_children().pick_random()
-		terrain_feature.visible = true
-		terrain_feature.rotate(deg_to_rad(90))
-		terrain_feature.position.x = randi() % width * 10
-		terrain_feature.position.y = randi() % height * 10
+	for i in range(1): 
+		var hill_scenes: Array[PackedScene] = load_scenes_from_folder("res://assets/terrain/hills/")
+		hill_scenes.shuffle()
+		var hill = hill_scenes.pop_front().instantiate()
+		hill.rotate(deg_to_rad(randi_range(0,3) * 90))
+		hill.set_global_position(Vector2i(100,100))
+		terrain_objects.add_child(hill)
+		#terrain_feature.visible = true
+		#terrain_feature.rotate(deg_to_rad(180))
+		#terrain_feature.position = Vector2i(randi() % width, randi() % height)
+		#terrain_feature.set_global_position(Vector2i(100,100))
+
+
+func load_scenes_from_folder(path: String) -> Array[PackedScene]:
+	var loaded_scenes: Array[PackedScene] = []
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.get_extension() == "tscn":
+				var full_path = path + "/" + file_name
+				var scene = ResourceLoader.load(full_path) as PackedScene
+				if scene:
+					loaded_scenes.append(scene)
+				file_name = dir.get_next()
+	return loaded_scenes

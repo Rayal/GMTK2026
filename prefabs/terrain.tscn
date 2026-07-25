@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://crcg4h5hcms0" path="res://scripts/terrain_generation.gd" id="1_sjdqh"]
 [ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="2_sjdqh"]
-[ext_resource type="PackedScene" uid="uid://dwbic62assjp2" path="res://assets/terrain/l_hill.tscn" id="3_vrr3d"]
-[ext_resource type="PackedScene" uid="uid://db7nufweokbmo" path="res://assets/terrain/l_lake.tscn" id="4_wr12m"]
+[ext_resource type="PackedScene" uid="uid://dwbic62assjp2" path="res://assets/terrain/hills/l_hill.tscn" id="3_vrr3d"]
+[ext_resource type="PackedScene" uid="uid://db7nufweokbmo" path="res://assets/terrain/lakes/l_lake.tscn" id="4_wr12m"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_nkjy7"]
 noise_type = 3

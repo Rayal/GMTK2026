@@ -1,9 +1,9 @@
-[gd_scene format=4 uid="uid://dwbic62assjp2"]
+[gd_scene format=4 uid="uid://cd7ymklrs8xg2"]
 
-[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="1_d0s34"]
+[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="1_5x3fu"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qlw1d"]
-texture = ExtResource("1_d0s34")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vhy1o"]
+texture = ExtResource("1_5x3fu")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -699,11 +699,10 @@ texture = ExtResource("1_d0s34")
 17:37/0 = 0
 18:37/0 = 0
 19:37/0 = 0
-8:4/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_pkldr"]
-sources/0 = SubResource("TileSetAtlasSource_qlw1d")
+sources/0 = SubResource("TileSetAtlasSource_vhy1o")
 
-[node name="L-hill" type="TileMapLayer" unique_id=1928566254]
-tile_map_data = PackedByteArray("AAAAAAEAAAABAAUAAAABAAAAAAABAAUAAAABAAEAAAABAAUAAAADAAAAAAAAAAQAAAADAAEAAAADAAQAAAADAAIAAAABAAUAAAACAAMAAAABAAUAAAABAAMAAAABAAUAAAAAAAMAAAAAAAUAAAAAAAIAAAAAAAQAAAABAAIAAAABAAQAAAACAAIAAAADAAQAAAAAAAAAAAABAAUAAAAAAAQAAAAAAAYAAAACAAQAAAABAAYAAAABAAQAAAABAAYAAAADAAQAAAABAAYAAAAEAAQAAAACAAYAAAAEAAMAAAACAAUAAAAEAAIAAAACAAUAAAAEAAEAAAACAAUAAAAEAAAAAAACAAQAAAACAAEAAAAAAAQAAAADAAMAAAABAAUAAAACAAAAAAABAAUAAAA=")
+[node name="TileMapLayer" type="TileMapLayer" unique_id=1601263948]
+tile_map_data = PackedByteArray("AAD//wAAAAAAAAYAAAAAAAAAAAACAAYAAAD/////AAAAAAQAAAAAAP//AAACAAQAAAAAAAEAAAABAAYAAAD//wEAAAABAAYAAAD///7/AAABAAQAAAAAAP7/AAABAAQAAAABAP7/AAACAAQAAAD+//7/AAAAAAQAAAD+/wEAAAAAAAYAAAABAAEAAAACAAYAAAABAP//AAACAAUAAAABAAAAAAACAAUAAAD+////AAAAAAUAAAD+/wAAAAAAAAUAAAA=")
 tile_set = SubResource("TileSet_pkldr")
