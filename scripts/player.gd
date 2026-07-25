@@ -12,7 +12,7 @@ var mountain_speed = base_speed / 4
 var zoom_speed: float = 2.0
 var norm_zoom: float = 1
 var min_zoom: float = 0.5
-var max_zoom: float = 2.0
+var max_zoom: float = 1.5
 var target_zoom: float = norm_zoom
 
 @export var life_time_sec: int = 100
@@ -179,10 +179,8 @@ func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, 
 		var col_layer = PhysicsServer2D.body_get_collision_layer(body_rid)
 		if col_layer == 1:
 			touching_mountain_tiles.append(body_rid)
-			in_mountains()
 		elif col_layer == 8:
 			touching_forest_tiles.append(body_rid)
-			in_forest()
 		else:
 			pass
 		if not touching_mountain_tiles.is_empty():

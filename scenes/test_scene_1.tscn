@@ -22,11 +22,9 @@ script = ExtResource("6_gmscn")
 [node name="Player" parent="." unique_id=155794638 instance=ExtResource("1_hd1c1")]
 top_level = true
 position = Vector2(124.99999, 68.99999)
-
 collision_layer = 15
 collision_mask = 15
 life_time_sec = 30
-
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=508246576]
 
