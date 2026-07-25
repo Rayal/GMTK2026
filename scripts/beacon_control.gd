@@ -13,7 +13,6 @@ var triangle_resource: Resource
 
 var beacons: Dictionary[int, Beacon] = {}
 var triangles: Dictionary[int, Triangle] = {}
-var beacons_on_screen: Array[int] = []
 
 
 func _ready() -> void:
@@ -26,49 +25,27 @@ func _on_new_beacon_request() -> void:
 	var beacon = beacon_resource.instantiate()
 	beacon.id = beacon_number
 	beacons[beacon.id] = beacon
-	
-	var notifier: VisibleOnScreenNotifier2D = beacon.get_node("VisibleOnScreenNotifier2D")
-	notifier.screen_entered.connect(_on_beacon_entered.bind(beacon.id))
-	notifier.screen_exited.connect(_on_beacon_exited.bind(beacon.id))
-	
 	new_beacon.emit(beacon)
 	beacon_number += 1
-	if beacons_on_screen.size() >= 2:
-		create_triangle(beacon)
 	update_label()
 
 
-func _on_beacon_entered(beacon_id: int):
-	beacons_on_screen.append(beacon_id)
-	print("Beacons on screen: ", beacons_on_screen)
+func _on_triangle_request(beacon: Beacon, beacons: Array[Beacon]):
+	beacons.sort_custom(
+		func(a,b):
+			return (
+						beacon.position.angle_to_point(a.position) <=
+						beacon.position.angle_to_point(b.position)
+					)
+	)
+	for i in range(beacons.size() - 1):
+		create_triangle([beacon, beacons[i], beacons[i+1]])
 
-
-func _on_beacon_exited(beacon_id: int):
-	beacons_on_screen.remove_at(beacons_on_screen.find(beacon_id))
-	print("Beacons on screen: ", beacons_on_screen)
-
-
-
-func create_triangle(beacon: Beacon):
-	print("CT|Beacons on screen: ", beacons_on_screen)
+func create_triangle(beacons: Array[Beacon]):
 	var triangle = triangle_resource.instantiate()
-	
-	beacons_on_screen.sort_custom(
-		func(a, b):
-			return (beacons[a].position.distance_to(beacon.position) <= 
-					beacons[b].position.distance_to(beacon.position))
-	)
-	print("CT|Beacons closest: ", beacons_on_screen.slice(0, 2))
-	triangle.vertices = beacons_on_screen.slice(0, 2)
-	triangle.vertices.append(beacon.id)
+	triangle.vertices = beacons
 	triangle.id = triangle_number
-	triangle.init(
-		[
-			beacons[beacons_on_screen[0]].global_position,
-			beacons[beacons_on_screen[1]].global_position,
-			beacon.global_position
-		]
-	)
+	triangle.init()
 	triangles[triangle.id] = triangle
 	get_tree().current_scene.add_child(triangle)	
 	triangle_number += 1
