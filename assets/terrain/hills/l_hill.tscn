@@ -86,10 +86,15 @@ texture = ExtResource("1_d0s34")
 17:3/0 = 0
 18:3/0 = 0
 0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:4/0 = 0
 9:4/0 = 0
 11:4/0 = 0
@@ -103,10 +108,15 @@ texture = ExtResource("1_d0s34")
 21:4/0 = 0
 22:4/0 = 0
 0:5/0 = 0
+0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:5/0 = 0
+1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:5/0 = 0
+2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:5/0 = 0
+3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:5/0 = 0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 5:5/0 = 0
 7:5/0 = 0
 8:5/0 = 0
@@ -123,10 +133,15 @@ texture = ExtResource("1_d0s34")
 21:5/0 = 0
 22:5/0 = 0
 0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:6/0 = 0
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:6/0 = 0
+3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:6/0 = 0
 9:6/0 = 0
 11:6/0 = 0
@@ -702,8 +717,9 @@ texture = ExtResource("1_d0s34")
 8:4/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_pkldr"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_qlw1d")
 
 [node name="L-hill" type="TileMapLayer" unique_id=1928566254]
-tile_map_data = PackedByteArray("AAAAAAIAAAABAAYAAAABAAIAAAABAAYAAAACAAIAAAACAAYAAAACAAEAAAACAAUAAAD+/wAAAAAAAAQAAAD+/wEAAAAAAAUAAAD+/wIAAAAAAAYAAAD//wAAAAABAAQAAAD//wEAAAABAAUAAAD//wIAAAABAAYAAAAAAP//AAAAAAQAAAAAAAAAAAADAAQAAAAAAAEAAAABAAUAAAABAP7/AAAAAAQAAAABAP//AAADAAQAAAABAAAAAAABAAUAAAABAAEAAAABAAUAAAACAP7/AAACAAQAAAACAP//AAACAAUAAAACAAAAAAACAAUAAAD///3/AAABABkAAAAAAP3/AAACABkAAAABAP3/AAADABkAAAD9//7/AAAAABYAAAD9////AAAAABcAAAD9/wAAAAAAABgAAAA=")
+tile_map_data = PackedByteArray("AAAAAAIAAAABAAYAAAABAAIAAAABAAYAAAACAAIAAAACAAYAAAACAAEAAAACAAUAAAD+/wAAAAAAAAQAAAD+/wEAAAAAAAUAAAD+/wIAAAAAAAYAAAD//wAAAAABAAQAAAD//wEAAAABAAUAAAD//wIAAAABAAYAAAAAAP//AAAAAAQAAAAAAAAAAAADAAQAAAAAAAEAAAABAAUAAAABAP7/AAAAAAQAAAABAP//AAADAAQAAAABAAAAAAABAAUAAAABAAEAAAABAAUAAAACAP7/AAACAAQAAAACAP//AAACAAUAAAACAAAAAAACAAUAAAD9//3/AAAAAAQAAAD9//7/AAAAAAUAAAD9////AAAAAAYAAAD+//3/AAACAAQAAAD+//7/AAACAAUAAAD+////AAACAAYAAAA=")
 tile_set = SubResource("TileSet_pkldr")

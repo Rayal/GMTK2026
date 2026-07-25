@@ -27,7 +27,7 @@ func _ready() -> void:
 
 
 func generate_seed():
-	noise.seed = rng.randi()
+	noise.seed = 45 #rng.randi()
 
 func create_base_terrain():
 	generate_seed()
@@ -87,7 +87,7 @@ func add_terrain_element(terrain_element: String, pos_vector: Vector2i):
 		var element_scenes: Array[PackedScene] = load_scenes_from_folder("res://assets/terrain/" + terrain_element + "/")
 		element_scenes.shuffle()
 		var element = element_scenes.pop_front().instantiate()
-		element.rotate(deg_to_rad(randi_range(0,3) * 90))
+		#element.rotate(deg_to_rad(randi_range(0,3) * 90))
 		var tile_size: Vector2= terrain.tile_set.tile_size / 2
 		element.set_global_position(terrain.map_to_local(pos_vector) - tile_size)
 		terrain_objects.add_child(element)
