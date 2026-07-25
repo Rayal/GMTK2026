@@ -1418,16 +1418,18 @@ sources/0 = SubResource("TileSetAtlasSource_vrr3d")
 [node name="Terrain" type="Node2D" unique_id=979663302 node_paths=PackedStringArray("terrain", "terrain_objects")]
 script = ExtResource("1_sjdqh")
 noise = SubResource("FastNoiseLite_rk2s5")
-
 terrain = NodePath("TileMapLayer")
 terrain_objects = NodePath("TileMapLayerObjects")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1976135898]
 texture_filter = 1
 position = Vector2(-1, 1)
+scale = Vector2(5, 5)
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAADAAUAAAABAAEAAAADAAUAAAAAAAEAAAADAAUAAAACAAEAAAAIAAcAAAACAAIAAAAAAAAAAAADAAIAAAACAAYAAAADAAEAAAAIAAcAAAADAAAAAAAIAAcAAAACAAAAAAAIAAcAAAABAAIAAAAOAAYAAAAAAAIAAAADAAYAAAA=")
 tile_set = SubResource("TileSet_pkldr")
 
 [node name="TileMapLayerObjects" type="TileMapLayer" parent="." unique_id=518857739]
 top_level = true
+texture_filter = 1
+scale = Vector2(5, 5)
 tile_set = SubResource("TileSet_sjdqh")
