@@ -3,4 +3,13 @@
 [ext_resource type="Script" uid="uid://x54nberfa3y0" path="res://scripts/triangle.gd" id="1_sil7u"]
 
 [node name="Triangle" type="Area2D" unique_id=1939370745]
+texture_filter = 1
+collision_layer = 32768
+collision_mask = 32768
 script = ExtResource("1_sil7u")
+fill_alpha = 0.25
+shading_color = Color(0.20192143, 0.3834418, 0.886818, 1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1821509139]
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1515625105]
