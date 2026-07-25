@@ -19,11 +19,21 @@ area_mapped = null
 beacon_asset_path = "res://prefabs/beacon.tscn"
 triangle_asset_path = "res://prefabs/triangle.tscn"
 
-[node name="Label" type="Label" parent="." unique_id=291733585]
+[node name="BeaconLabel" type="Label" parent="." unique_id=291733585]
 texture_filter = 1
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Beacons Placed: 0"
+label_settings = SubResource("LabelSettings_c7jcs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TriangleLabel" type="Label" parent="." unique_id=1357268505]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 23.0
+text = "
+Area Mapped: 0 px²"
 label_settings = SubResource("LabelSettings_c7jcs")
 horizontal_alignment = 1
 vertical_alignment = 1

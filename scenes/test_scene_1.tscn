@@ -30,7 +30,7 @@ position = Vector2(0, 30)
 scale = Vector2(2, 2)
 beacon_number = 0
 triangle_number = 0
-area_mapped = 0.0
+area_mapped = 0
 
 [node name="TimeLabel" type="Node2D" parent="HUD" unique_id=1992800703]
 texture_filter = 1
