@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://crcg4h5hcms0" path="res://scripts/terrain_generation.gd" id="1_sjdqh"]
 [ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="2_sjdqh"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vrr3d"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rk2s5"]
 noise_type = 3
-frequency = 0.1023
+frequency = 0.3
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sjdqh"]
 texture = ExtResource("2_sjdqh")
@@ -1417,7 +1417,8 @@ sources/0 = SubResource("TileSetAtlasSource_vrr3d")
 
 [node name="Terrain" type="Node2D" unique_id=979663302 node_paths=PackedStringArray("terrain", "terrain_objects")]
 script = ExtResource("1_sjdqh")
-noise = SubResource("FastNoiseLite_vrr3d")
+noise = SubResource("FastNoiseLite_rk2s5")
+
 terrain = NodePath("TileMapLayer")
 terrain_objects = NodePath("TileMapLayerObjects")
 
