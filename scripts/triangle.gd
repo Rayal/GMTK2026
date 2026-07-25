@@ -6,6 +6,7 @@ class_name Triangle extends Area2D
 
 @export var colour: Color = Color.DARK_ORCHID
 @export_range(0.0, 1.0) var fill_alpha: float = 0.35
+@export var shading_color: Color = Color.DARK_ORCHID
 
 var vertices2D: PackedVector2Array = []
 
@@ -18,6 +19,8 @@ func init() -> void:
 	$CollisionPolygon2D.polygon = vertices2D
 	$Polygon2D.polygon = vertices2D
 	$Polygon2D.material = _get_marble_material()
+	$Polygon2D.set_instance_shader_parameter("color_a", shading_color)
+	$Polygon2D.set_instance_shader_parameter("color_b", shading_color.lightened(0.4))
 	area = (
 		0.5 *
 		vertices[0].global_position.distance_to(vertices[1].global_position) *
@@ -37,7 +40,7 @@ func _draw() -> void:
 static func _get_marble_material() -> ShaderMaterial:
 	if marble_material == null:
 		var noise := FastNoiseLite.new()
-		noise.frequency = 0.03
+		noise.frequency = 0.005
 
 		var noise_texture := NoiseTexture2D.new()
 		noise_texture.seamless = true
