@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dwbic62assjp2" path="res://assets/terrain/hills/l_hill.tscn" id="3_vrr3d"]
 [ext_resource type="PackedScene" uid="uid://db7nufweokbmo" path="res://assets/terrain/lakes/l_lake.tscn" id="4_wr12m"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_nkjy7"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rk2s5"]
 noise_type = 3
-frequency = 0.3198
+frequency = 0.3
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sjdqh"]
 texture = ExtResource("2_sjdqh")
@@ -1417,13 +1417,11 @@ texture = ExtResource("2_sjdqh")
 [sub_resource type="TileSet" id="TileSet_sjdqh"]
 sources/0 = SubResource("TileSetAtlasSource_vrr3d")
 
-[node name="Terrain" type="Node2D" unique_id=979663302]
-
-[node name="TerrainGeneration" type="Node2D" parent="." unique_id=1465908473 node_paths=PackedStringArray("terrain", "terrain_objects")]
+[node name="Terrain" type="Node2D" unique_id=979663302 node_paths=PackedStringArray("terrain", "terrain_objects")]
 script = ExtResource("1_sjdqh")
-noise = SubResource("FastNoiseLite_nkjy7")
-terrain = NodePath("../TileMapLayer")
-terrain_objects = NodePath("../TileMapLayerObjects")
+noise = SubResource("FastNoiseLite_rk2s5")
+terrain = NodePath("TileMapLayer")
+terrain_objects = NodePath("TileMapLayerObjects")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1976135898]
 texture_filter = 1
