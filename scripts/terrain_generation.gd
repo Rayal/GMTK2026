@@ -13,6 +13,10 @@ var rng = RandomNumberGenerator.new()
 @export var terrain: TileMapLayer
 @export var terrain_objects: TileMapLayer
 
+@export var hill_generation_probability: = 1
+@export var lake_generation_probability: = 0.5
+@export var settelment_generation_probability: = 0.1
+
 func _ready() -> void:
 	create_base_terrain()
 	emit_limit()
@@ -35,9 +39,9 @@ func create_base_terrain():
 
 func emit_limit():
 	var rect = terrain.get_used_rect()
-	var cell_size = terrain.tile_set.tile_size
-	var top_left: Vector2 = terrain.to_global(rect.position * cell_size)
-	var bottom_right: Vector2 = terrain.to_global(rect.end * cell_size)
+	var tile_size = terrain.tile_set.tile_size
+	var top_left: Vector2 = terrain.to_global(rect.position * tile_size)
+	var bottom_right: Vector2 = terrain.to_global(rect.end * tile_size)
 	print(top_left)
 	print(bottom_right)
 	terrain_limits.emit(top_left, bottom_right)
@@ -45,18 +49,19 @@ func emit_limit():
 
 
 func create_objects_on_terrain():
-	
-	for i in range(1): 
-		var hill_scenes: Array[PackedScene] = load_scenes_from_folder("res://assets/terrain/hills/")
-		hill_scenes.shuffle()
-		var hill = hill_scenes.pop_front().instantiate()
-		hill.rotate(deg_to_rad(randi_range(0,3) * 90))
-		hill.set_global_position(Vector2i(100,100))
-		terrain_objects.add_child(hill)
-		#terrain_feature.visible = true
-		#terrain_feature.rotate(deg_to_rad(180))
-		#terrain_feature.position = Vector2i(randi() % width, randi() % height)
-		#terrain_feature.set_global_position(Vector2i(100,100))
+	add_terrain_element("hills")
+
+
+func add_terrain_element(terrain_element: String):
+		var max_object_size = 4
+		var element_scenes: Array[PackedScene] = load_scenes_from_folder("res://assets/terrain/" + terrain_element + "/")
+		element_scenes.shuffle()
+		var element = element_scenes.pop_front().instantiate()
+		element.rotate(deg_to_rad(randi_range(0,3) * 90))
+		var tile_size: Vector2= terrain.tile_set.tile_size / 2
+		var pos_vector: Vector2i = Vector2i(randi_range(max_object_size, width-max_object_size), randi_range(max_object_size, height-max_object_size)) 
+		element.set_global_position(terrain.map_to_local(pos_vector) - tile_size)
+		terrain_objects.add_child(element)
 
 
 func load_scenes_from_folder(path: String) -> Array[PackedScene]:
