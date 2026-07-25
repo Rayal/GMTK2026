@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://rjewecqg1j6h"]
+
+[ext_resource type="Script" uid="uid://bvb7ok4s7w6mp" path="res://scripts/beacon_control.gd" id="1_oyos7"]
+[ext_resource type="FontFile" uid="uid://c21bi8ui0tqoa" path="res://fonts/yoster.ttf" id="2_5hi7f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c7jcs"]
+font = ExtResource("2_5hi7f")
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.9411765)
+
+[node name="BeaconControl" type="Node2D" unique_id=1891820081]
+texture_filter = 1
+script = ExtResource("1_oyos7")
+beacon_asset_path = "res://prefabs/beacon.tscn"
+triangle_asset_path = "res://prefabs/triangle.tscn"
+
+[node name="Label" type="Label" parent="." unique_id=291733585]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Beacons Placed: 0"
+label_settings = SubResource("LabelSettings_c7jcs")
+horizontal_alignment = 1
+vertical_alignment = 1
