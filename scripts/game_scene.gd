@@ -8,7 +8,7 @@ signal upgrade_choice(choice: int)
 
 func _ready() -> void:
 	settlement_dialog.get_ok_button().hide()
-	#$AudioStreamPlayer.play()
+	$AudioStreamPlayer.play()
 
 func _on_player_player_died() -> void:
 	get_tree().paused = true

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://rjewecqg1j6h" path="res://prefabs/beacon_control.tscn" id="4_jinhd"]
 [ext_resource type="Script" uid="uid://cowmvm71rw8r1" path="res://scripts/time_label.gd" id="5_0joms"]
 [ext_resource type="FontFile" uid="uid://c21bi8ui0tqoa" path="res://fonts/yoster.ttf" id="6_g3tec"]
-[ext_resource type="AudioStream" uid="uid://qicj0kbtk8b7" path="res://assets/sound/Willow's Waltz.wav" id="7_vy022"]
+[ext_resource type="AudioStream" uid="uid://b4vqhpixkyens" path="res://assets/sound/Willow's Waltz.mp3" id="7_vy022"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ohw3e"]
 font = ExtResource("6_g3tec")
@@ -52,10 +52,8 @@ ok_button_text = "Restart"
 dialog_text = "Your play time has run out."
 cancel_button_text = "Quit"
 
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=402524783]
 stream = ExtResource("7_vy022")
-
 
 [node name="SettlementDialog" type="AcceptDialog" parent="." unique_id=1625673778]
 process_mode = 3
@@ -111,9 +109,5 @@ one_shot = true
 [connection signal="canceled" from="DeathDialog" to="." method="_on_death_dialog_canceled"]
 [connection signal="confirmed" from="DeathDialog" to="." method="_on_death_dialog_confirmed"]
 [connection signal="canceled" from="SettlementDialog" to="." method="_on_settlement_dialog_closed"]
-[connection signal="pressed" from="SettlementDialog/VBoxContainer/Choice1" to="." method="_on_settlement_choice_pressed" binds= [0]]
-[connection signal="pressed" from="SettlementDialog/VBoxContainer/Choice2" to="." method="_on_settlement_choice_pressed" binds= [1]]
-[connection signal="pressed" from="SettlementDialog/VBoxContainer/Choice3" to="." method="_on_settlement_choice_pressed" binds= [2]]
-[connection signal="pressed" from="SettlementDialog/VBoxContainer/Choice4" to="." method="_on_settlement_choice_pressed" binds= [3]]
 [connection signal="canceled" from="SettlementDialog2" to="." method="_on_settlement_dialog_closed"]
 [connection signal="confirmed" from="SettlementDialog2" to="." method="_on_settlement_dialog_closed"]
