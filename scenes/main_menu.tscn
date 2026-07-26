@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bdt2g73l48cbv"]
 
 [ext_resource type="Script" uid="uid://oi2g7pevxen1" path="res://scripts/main_menu.gd" id="1_mnu"]
+[ext_resource type="Texture2D" uid="uid://dxrercod5ash7" path="res://assets/Game world.png" id="2_ekxnf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_05p07"]
 font_size = 40
@@ -14,6 +15,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mnu")
 game_scene = "res://scenes/test_scene_2.tscn"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1561643669]
+show_behind_parent = true
+texture = ExtResource("2_ekxnf")
+centered = false
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=2115953639]
 layout_mode = 1
