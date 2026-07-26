@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://boppfkqcskw6d" path="res://scripts/player_alt.gd" id="1_sc3pk"]
 [ext_resource type="Texture2D" uid="uid://b0lchet0rtan8" path="res://assets/characters/prototype/default/idle.png" id="2_sc3pk"]
 [ext_resource type="Texture2D" uid="uid://dy1nloj3omslw" path="res://assets/characters/prototype/default/walk.png" id="3_14na2"]
-[ext_resource type="AudioStream" uid="uid://bbeo4hcd5ruwo" path="res://assets/sound/digital_footstep_gravel_3.wav" id="5_14na2"]
 [ext_resource type="AudioStream" uid="uid://bmowbm2yhud0o" path="res://assets/sound/wood_small_gather.wav" id="6_1rn14"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r3tw4"]
@@ -305,18 +304,11 @@ hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1942839042]
-stream = ExtResource("5_14na2")
-volume_db = -6.228
-bus = &"Delay"
-
 [node name="PlaceBeacon" type="AudioStreamPlayer" parent="." unique_id=41543067]
 stream = ExtResource("6_1rn14")
 
 [node name="Timer" type="Timer" parent="." unique_id=1921486281]
 one_shot = true
-
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
 [connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]
