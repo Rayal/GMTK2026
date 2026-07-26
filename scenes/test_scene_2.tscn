@@ -102,7 +102,6 @@ wait_time = 30.0
 one_shot = true
 
 [connection signal="upgrade_choice" from="." to="Player" method="_on_upgrade_choice"]
->>>>>>> 5eafdf9b7b7b1767cf289e6c90760049f8ec45a0
 [connection signal="terrain_limits" from="Terrain" to="Player" method="_on_terrain_terrain_limits"]
 [connection signal="new_beacon_request" from="Player" to="HUD/BeaconControl" method="_on_new_beacon_request"]
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
