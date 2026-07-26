@@ -31,7 +31,6 @@ func _on_new_beacon_request() -> void:
 
 
 func _on_triangle_request(beacon: Beacon, beacons: Array[Beacon]):
-	print("Triangle request")
 	if beacons.size() == 2:
 		beacons.append(beacon)
 		create_triangle(beacons)

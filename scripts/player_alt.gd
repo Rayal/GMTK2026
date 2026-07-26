@@ -40,6 +40,8 @@ func _ready() -> void:
 	speed = base_speed
 	time_left_sec = life_time_sec
 	$AnimatedSprite2D.play()
+	z_as_relative = false
+	z_index = 5
 
 
 func _physics_process(delta):
@@ -131,7 +133,6 @@ func player_death():
 
 
 func find_beacons():
-	print("Find beacons")
 	valid_beacons.clear()
 	if beacons_on_screen.size() < 2:
 		return
@@ -142,8 +143,6 @@ func find_beacons():
 			var collision_point: Vector2 = $BeaconCast.get_collision_point()
 			if collision_point.distance_to(beacon.global_position) < 1:
 				valid_beacons.append(beacon)
-			print("BC|Collision: ", collision_point)
-			print("Beacon position: ", beacon.global_position)
 		else:
 			valid_beacons.append(beacon)
 
@@ -158,6 +157,7 @@ func _on_terrain_terrain_limits(top_left: Vector2, bottom_right: Vector2) -> voi
 	$Camera2D.limit_right = bottom_right.x
 	$Camera2D.limit_left = top_left.x
 	$Camera2D.limit_top = top_left.y
+	position = (top_left + bottom_right) / 2
 
 
 func _on_new_beacon(beacon: Beacon) -> void:
@@ -171,12 +171,10 @@ func _on_new_beacon(beacon: Beacon) -> void:
 
 func _on_beacon_entered(beacon: Beacon):
 	beacons_on_screen.append(beacon)
-	print("Beacons on screen: ", beacons_on_screen)
 
 
 func _on_beacon_exited(beacon: Beacon):
 	beacons_on_screen.remove_at(beacons_on_screen.find(beacon))
-	print("Beacons on screen: ", beacons_on_screen)
 
 
 func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:

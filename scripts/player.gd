@@ -40,7 +40,8 @@ func _ready() -> void:
 	speed = base_speed
 	time_left_sec = life_time_sec
 	$AnimatedSprite2D.play()
-
+	z_as_relative = false
+	z_index = 5
 
 func process_life_timer(delta: float) -> void:
 	if player_dead:

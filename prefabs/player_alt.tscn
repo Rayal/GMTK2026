@@ -10,7 +10,7 @@ script = ExtResource("1_ak18q")
 metadata/_edit_group_ = true
 
 [node name="CharacterBody2D" parent="." unique_id=465320820 instance=ExtResource("2_1s4s1")]
-base_speed = null
-speed = null
-life_time_sec = null
-time_left_sec = null
+base_speed = 400
+speed = 0
+life_time_sec = 100
+time_left_sec = 0
