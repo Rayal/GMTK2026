@@ -58,10 +58,58 @@ ok_button_text = "Restart"
 dialog_text = "Your play time has run out."
 cancel_button_text = "Quit"
 
+[node name="SettlementDialog" type="AcceptDialog" parent="." unique_id=1625673778]
+process_mode = 3
+title = "Settlement"
+initial_position = 1
+size = Vector2i(389, 211)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettlementDialog" unique_id=787879255]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 280.0
+offset_bottom = 160.0
+
+[node name="Label" type="Label" parent="SettlementDialog/VBoxContainer" unique_id=1147536279]
+layout_mode = 2
+text = "You have entered a settlement.
+You may pick a powerup."
+
+[node name="Choice1" type="Button" parent="SettlementDialog/VBoxContainer" unique_id=1530262428]
+layout_mode = 2
+text = "Random Respec"
+
+[node name="Choice2" type="Button" parent="SettlementDialog/VBoxContainer" unique_id=600994133]
+layout_mode = 2
+text = "Ranger: Improve Speed and Vision in Woodland"
+
+[node name="Choice3" type="Button" parent="SettlementDialog/VBoxContainer" unique_id=1823247881]
+layout_mode = 2
+text = "Mountaineer: Improve speed in mountains"
+
+[node name="SettlementDialog2" type="AcceptDialog" parent="." unique_id=1021649385]
+process_mode = 3
+title = "Settlement"
+initial_position = 1
+size = Vector2i(508, 100)
+dialog_text = "You must wait 30 seconds before you can get another powerup."
+
+[node name="Timer" type="Timer" parent="." unique_id=1581195255]
+wait_time = 30.0
+one_shot = true
+
+[connection signal="upgrade_choice" from="." to="Player" method="_on_upgrade_choice"]
 [connection signal="terrain_limits" from="Terrain" to="Player" method="_on_terrain_terrain_limits"]
 [connection signal="new_beacon_request" from="Player" to="HUD/BeaconControl" method="_on_new_beacon_request"]
 [connection signal="player_died" from="Player" to="Player" method="_on_player_died"]
+[connection signal="settlement_entered" from="Player" to="." method="_on_player_settlement_entered"]
 [connection signal="triangles_request" from="Player" to="HUD/BeaconControl" method="_on_triangle_request"]
 [connection signal="new_beacon" from="HUD/BeaconControl" to="Player" method="_on_new_beacon"]
 [connection signal="canceled" from="DeathDialog" to="." method="_on_death_dialog_canceled"]
 [connection signal="confirmed" from="DeathDialog" to="." method="_on_death_dialog_confirmed"]
+[connection signal="canceled" from="SettlementDialog" to="." method="_on_settlement_dialog_closed"]
+[connection signal="pressed" from="SettlementDialog/VBoxContainer/Choice1" to="." method="_on_settlement_choice_pressed" binds= [0]]
+[connection signal="pressed" from="SettlementDialog/VBoxContainer/Choice2" to="." method="_on_settlement_choice_pressed" binds= [1]]
+[connection signal="pressed" from="SettlementDialog/VBoxContainer/Choice3" to="." method="_on_settlement_choice_pressed" binds= [2]]
+[connection signal="canceled" from="SettlementDialog2" to="." method="_on_settlement_dialog_closed"]
+[connection signal="confirmed" from="SettlementDialog2" to="." method="_on_settlement_dialog_closed"]
