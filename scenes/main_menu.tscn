@@ -47,10 +47,15 @@ text = "Start"
 layout_mode = 2
 text = "Settings"
 
+[node name="AboutButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=58172547]
+layout_mode = 2
+text = "About"
+
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1714348861]
 layout_mode = 2
 text = "Quit"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/AboutButton" to="." method="_on_about_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

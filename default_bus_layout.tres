@@ -1,0 +1,24 @@
+[gd_resource type="AudioBusLayout" format=3 uid="uid://ct33mw21k8ao4"]
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_j3pel"]
+resource_name = "Delay"
+dry = 0.44
+tap1_delay_ms = 1500.0
+tap1_level_db = -22.67
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_g28q7"]
+resource_name = "Delay"
+tap1_delay_ms = 1069.0
+tap1_level_db = 0.0
+
+[resource]
+bus/1/name = &"Delay"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectDelay_j3pel")
+bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource("AudioEffectDelay_g28q7")
+bus/1/effect/1/enabled = false

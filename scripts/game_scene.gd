@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var death_dialog: ConfirmationDialog = $DeathDialog
 
+func _ready() -> void:
+	$AudioStreamPlayer.play()
 
 func _on_player_player_died() -> void:
 	get_tree().paused = true

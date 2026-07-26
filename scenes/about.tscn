@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://md7au3o6qm0x"]
+
+[ext_resource type="Script" uid="uid://cpfq4usqcyxi1" path="res://scripts/about.gd" id="1_j4mam"]
+[ext_resource type="Texture2D" uid="uid://dxrercod5ash7" path="res://assets/Game world.png" id="2_23fuk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pkldr"]
+
+[node name="SettingsMenu" type="Control" unique_id=1386742076]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j4mam")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1480581142]
+show_behind_parent = true
+texture = ExtResource("2_23fuk")
+centered = false
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=345360715]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=588534521]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=808487879]
+layout_mode = 2
+text = "A game by Andreas Ayal and Taavi Vaikjärv
+
+Idea inspired by 
+https://www.youtube.com/watch?v=yTyX_EJQOIU
+
+Used assets:
+Puny world by merchan shade https://merchant-shade.itch.io/16x16-puny-world
+400 Sounds Pack by Chequered Ink https://ci.itch.io/400-sounds-pack
+Forest Folk – Cozy Fantasy Loop Pack by 
+PromptFM https://promptfm.itch.io/forest-folk-cozy-fantasy-loop-pack"
+label_settings = SubResource("LabelSettings_pkldr")
+
+[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2062201272]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

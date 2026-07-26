@@ -36,7 +36,6 @@ var new_player: bool = true
 var player_dead: bool = false
 var time_start: int
 
-
 func _ready() -> void:
 	size = $CollisionShape2D.shape.get_rect().size
 	speed = base_speed
@@ -44,6 +43,8 @@ func _ready() -> void:
 	$AnimatedSprite2D.play()
 	z_as_relative = false
 	z_index = 5
+	
+	$AudioStreamPlayer.stream = ResourceLoader.load("res://assets/sound/digital_footstep_grass_3.wav")
 
 
 func _physics_process(_delta):
@@ -102,10 +103,14 @@ func process_placement(_delta: float) -> void:
 		 Input.is_action_pressed("place_beacon")):
 		visualize_triangles = true
 		find_beacons()
+		$PlaceBeacon.play()
 	elif Input.is_action_just_released("place_beacon"):
 		visualize_triangles = false;
 		new_beacon_request.emit()
 
+func play_sound() -> void:
+	if not $AudioStreamPlayer.playing:
+		$AudioStreamPlayer.play()
 
 func _process(delta: float) -> void:
 	#if (Input.is_action_just_released("move_down") or
@@ -116,10 +121,9 @@ func _process(delta: float) -> void:
 	process_life_timer(delta)
 	process_movement(delta)
 	process_placement(delta)
-
-	$Camera2D.zoom = $Camera2D.zoom.lerp(target_zoom * Vector2(1, 1), zoom_speed * delta)
-
 	queue_redraw()
+	play_sound()
+	$Camera2D.zoom = $Camera2D.zoom.lerp(target_zoom * Vector2(1, 1), zoom_speed * delta)
 
 
 func _draw() -> void:
@@ -186,12 +190,12 @@ func _on_beacon_exited(beacon: Beacon):
 func in_forest():
 	speed = base_speed * forest_speed_modifier
 	target_zoom = line_of_sight_modifier * forest_zoom
-
+	$AudioStreamPlayer.stream = ResourceLoader.load("res://assets/sound/digital_footstep_snow_1.wav")
 
 func in_mountains():
 	speed = base_speed * mountain_speed_modifier
 	target_zoom = line_of_sight_modifier * mountain_zoom
-
+	$AudioStreamPlayer.stream = ResourceLoader.load("res://assets/sound/digital_footstep_gravel_3.wav")
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body is TileMapLayer:
@@ -218,6 +222,7 @@ func _on_area_2d_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index
 		if touching_mountain_tiles.is_empty() and touching_forest_tiles.is_empty():
 			speed = base_speed
 			target_zoom = line_of_sight_modifier
+			$AudioStreamPlayer.stream = ResourceLoader.load("res://assets/sound/digital_footstep_grass_3.wav")
 		elif not touching_mountain_tiles.is_empty():
 			in_mountains()
 		elif touching_mountain_tiles.is_empty() and not touching_forest_tiles.is_empty():

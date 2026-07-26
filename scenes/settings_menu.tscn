@@ -22,7 +22,6 @@ script = ExtResource("1_05p07")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1480581142]
 show_behind_parent = true
-position = Vector2(1, 4)
 texture = ExtResource("2_cr101")
 centered = false
 
@@ -194,12 +193,7 @@ max_value = 1.0
 step = 0.1
 value = 0.5
 
-[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer/Object propability" unique_id=169187115]
-layout_mode = 2
-text = "Back"
-
 [node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1714348861]
-visible = false
 layout_mode = 2
 text = "Back"
 
@@ -208,5 +202,4 @@ text = "Back"
 [connection signal="value_changed" from="CenterContainer/VBoxContainer/Object propability/Hills/VBoxContainer/Hills" to="." method="_on_hills_value_changed"]
 [connection signal="value_changed" from="CenterContainer/VBoxContainer/Object propability/Lakes/VBoxContainer/Lakes" to="." method="_on_lakes_value_changed"]
 [connection signal="value_changed" from="CenterContainer/VBoxContainer/Object propability/Settelment/VBoxContainer/Settelment" to="." method="_on_settelment_value_changed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Object propability/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

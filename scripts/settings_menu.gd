@@ -9,15 +9,6 @@ func _process(delta: float) -> void:
 	$CenterContainer.find_child("Lake propability value").text = str(settings.lake_generation_probability)
 	$CenterContainer.find_child("Settelment propability value").text = str(settings.settelment_generation_probability)
 	
-func _on_start_button_pressed() -> void:
-	get_tree().change_scene_to_file("")
-	
-func _on_settings_button_pressed() -> void:
-	get_tree().change_scene_to_file("")
-	
-func _on_quit_button_pressed() -> void:
-	get_tree().quit()
-
 
 func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

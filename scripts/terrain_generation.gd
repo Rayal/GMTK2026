@@ -63,7 +63,7 @@ func create_objects_on_terrain():
 func generate_map_object_locations() -> Array[Vector2i]:
 	var object_locations: Array[Vector2i] = []
 	var attempts := 0
-	while object_locations.size() > max_object_count or (object_locations.size() < min_object_count and attempts < 100):
+	while object_locations.size() > max_object_count or (object_locations.size() < min_object_count and attempts < 500):
 		var sample := Vector2i(
 			randi_range(max_object_size, settings.map_width - max_object_size),
 			randi_range(max_object_size, settings.map_height - max_object_size)
