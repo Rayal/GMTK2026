@@ -4,18 +4,20 @@ signal new_beacon_request
 signal triangles_request(beacon: Beacon, beacons: Array[Beacon])
 signal player_died
 
+@export var life_time_sec: int = 100
 @export var base_speed: int = 400
-@export var speed: int
-var forest_speed = base_speed / 2
-var mountain_speed = base_speed / 4
+@export_range(0.1, 1.0, 0.1) var forest_speed_modifier : float = 0.5
+@export_range(0.1, 1.0, 0.1) var mountain_speed_modifier : float = 0.25
+@export_range(0.1, 2.0, 0.1) var line_of_sight_modifier: float = 1.0
+@export_range(0.1, 2.0, 0.1) var forest_zoom: float = 1.5
+@export_range(0.1, 2.0, 0.1) var mountain_zoom: float = 0.5
+
+var speed: int
 
 var zoom_speed: float = 2.0
-var norm_zoom: float = 1
-var min_zoom: float = 0.5
-var max_zoom: float = 1.5
-var target_zoom: float = norm_zoom
+var target_zoom: float = line_of_sight_modifier
 
-@export var life_time_sec: int = 100
+
 @export var time_left_sec: int
 
 var screen_size
@@ -44,11 +46,11 @@ func _ready() -> void:
 	z_index = 5
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide() 
 
 
-func process_life_timer(delta: float) -> void:
+func process_life_timer(_delta: float) -> void:
 	if player_dead:
 		return
 	if new_player and Input.is_anything_pressed():
@@ -93,7 +95,7 @@ func process_movement(delta: float) -> void:
 		$AnimatedSprite2D.animation = "idle" + $AnimatedSprite2D.animation.erase(0, 4)
 
 
-func process_placement(delta: float) -> void:
+func process_placement(_delta: float) -> void:
 	if player_dead:
 		return
 	if ( Input.is_action_just_pressed("place_beacon") or
@@ -163,6 +165,10 @@ func _on_terrain_terrain_limits(top_left: Vector2, bottom_right: Vector2) -> voi
 func _on_new_beacon(beacon: Beacon) -> void:
 	beacon.position = position
 	get_parent().add_child(beacon)
+	if not touching_mountain_tiles.is_empty():
+		beacon.set_z(4)
+	elif not touching_forest_tiles.is_empty():
+		beacon.set_z(1)
 	var notifier: VisibleOnScreenNotifier2D = beacon.get_node("VisibleOnScreenNotifier2D")
 	notifier.screen_entered.connect(_on_beacon_entered.bind(beacon))
 	notifier.screen_exited.connect(_on_beacon_exited.bind(beacon))
@@ -177,47 +183,14 @@ func _on_beacon_exited(beacon: Beacon):
 	beacons_on_screen.remove_at(beacons_on_screen.find(beacon))
 
 
-func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	if body is TileMapLayer:
-		var col_layer = PhysicsServer2D.body_get_collision_layer(body_rid)
-		if col_layer == 1:
-			touching_mountain_tiles.append(body_rid)
-		elif col_layer == 8:
-			touching_forest_tiles.append(body_rid)
-		else:
-			pass
-		if not touching_mountain_tiles.is_empty():
-			in_mountains()
-		elif not touching_forest_tiles.is_empty():
-			in_forest()
-	
-
-func _on_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	if body is TileMapLayer:
-		var col_layer = PhysicsServer2D.body_get_collision_layer(body_rid)
-		if col_layer == 1:
-			touching_mountain_tiles.erase(body_rid)
-		elif col_layer == 8:
-			touching_forest_tiles.erase(body_rid)
-		if touching_mountain_tiles.is_empty() and touching_forest_tiles.is_empty():
-			speed = base_speed
-			target_zoom = norm_zoom
-		elif not touching_mountain_tiles.is_empty():
-			in_mountains()
-		elif touching_mountain_tiles.is_empty() and not touching_forest_tiles.is_empty():
-			in_forest()
-		else:
-			pass
-
-
 func in_forest():
-	speed = forest_speed
-	target_zoom = max_zoom
+	speed = base_speed * forest_speed_modifier
+	target_zoom = line_of_sight_modifier * forest_zoom
 
 
 func in_mountains():
-	speed = mountain_speed
-	target_zoom = min_zoom
+	speed = base_speed * mountain_speed_modifier
+	target_zoom = line_of_sight_modifier * mountain_zoom
 
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
@@ -225,10 +198,10 @@ func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_inde
 		var col_layer = PhysicsServer2D.body_get_collision_layer(body_rid)
 		if col_layer == 1:
 			touching_mountain_tiles.append(body_rid)
+		elif col_layer == 4:
+			print("Entered town.")
 		elif col_layer == 8:
 			touching_forest_tiles.append(body_rid)
-		else:
-			pass
 		if not touching_mountain_tiles.is_empty():
 			in_mountains()
 		elif not touching_forest_tiles.is_empty():
@@ -244,10 +217,8 @@ func _on_area_2d_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index
 			touching_forest_tiles.erase(body_rid)
 		if touching_mountain_tiles.is_empty() and touching_forest_tiles.is_empty():
 			speed = base_speed
-			target_zoom = norm_zoom
+			target_zoom = line_of_sight_modifier
 		elif not touching_mountain_tiles.is_empty():
 			in_mountains()
 		elif touching_mountain_tiles.is_empty() and not touching_forest_tiles.is_empty():
 			in_forest()
-		else:
-			pass

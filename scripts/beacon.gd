@@ -5,4 +5,6 @@ class_name Beacon extends Area2D
 
 func _ready() -> void:
 	z_as_relative = false
-	z_index = 3
+
+func set_z(z: int) -> void:
+	z_index = z
