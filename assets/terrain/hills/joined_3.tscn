@@ -1,9 +1,9 @@
-[gd_scene format=4 uid="uid://dwbic62assjp2"]
+[gd_scene format=4 uid="uid://dy8otsbg84wo2"]
 
-[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="1_d0s34"]
+[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="1_l60y1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qlw1d"]
-texture = ExtResource("1_d0s34")
+texture = ExtResource("1_l60y1")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -720,6 +720,6 @@ texture = ExtResource("1_d0s34")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_qlw1d")
 
-[node name="hill" type="TileMapLayer" unique_id=1928566254]
-tile_map_data = PackedByteArray("AAAAAAIAAAABAAYAAAABAAIAAAABAAYAAAACAAIAAAACAAYAAAACAAEAAAACAAUAAAD+/wAAAAAAAAQAAAD+/wEAAAAAAAUAAAD+/wIAAAAAAAYAAAD//wAAAAABAAQAAAD//wEAAAABAAUAAAD//wIAAAABAAYAAAAAAP//AAAAAAQAAAAAAAAAAAADAAQAAAAAAAEAAAABAAUAAAABAP7/AAAAAAQAAAABAP//AAADAAQAAAABAAAAAAABAAUAAAABAAEAAAABAAUAAAACAP7/AAACAAQAAAACAP//AAACAAUAAAACAAAAAAACAAUAAAD9//3/AAAAAAQAAAD9//7/AAAAAAUAAAD9////AAAAAAYAAAD+//3/AAACAAQAAAD+//7/AAACAAUAAAD+////AAACAAYAAAA=")
+[node name="L-hill" type="TileMapLayer" unique_id=1928566254]
+tile_map_data = PackedByteArray("AAD+/wAAAAAEAAQAAAD//wAAAAAEAAYAAAAAAP//AAABAAQAAAAAAAAAAAABAAYAAAABAP//AAABAAQAAAABAAAAAAABAAYAAAACAP//AAACAAQAAAACAAAAAAACAAYAAAD/////AAAAAAQAAAD+////AAACAAUAAAD9////AAAAAAUAAAD9/wAAAAAAAAUAAAD9/wEAAAAAAAYAAAD+/wEAAAABAAYAAAD//wEAAAACAAYAAAD+//7/AAACAAQAAAD9//7/AAAAAAQAAAA=")
 tile_set = SubResource("TileSet_pkldr")

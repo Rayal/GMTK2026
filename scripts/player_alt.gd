@@ -157,7 +157,7 @@ func _on_terrain_terrain_limits(top_left: Vector2, bottom_right: Vector2) -> voi
 	$Camera2D.limit_top = top_left.y
 
 
-func _on_beacon_control_new_beacon(beacon: Beacon) -> void:
+func _on_new_beacon(beacon: Beacon) -> void:
 	beacon.position = position
 	get_parent().add_child(beacon)
 	var notifier: VisibleOnScreenNotifier2D = beacon.get_node("VisibleOnScreenNotifier2D")
@@ -217,8 +217,8 @@ func in_mountains():
 	target_zoom = min_zoom
 
 
-#func _on_beacon_control_new_beacon(beacon: Beacon) -> void:
-#	_on_new_beacon(beacon)
+func _on_beacon_control_new_beacon(beacon: Beacon) -> void:
+	_on_new_beacon(beacon)
 
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:

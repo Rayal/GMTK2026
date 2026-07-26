@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://djnb11ckb4t8x"]
+[gd_scene format=4 uid="uid://5fbvyppjhj7a"]
 
-[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="1_lwy2r"]
+[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="1_v8ri1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vu07q"]
-texture = ExtResource("1_lwy2r")
+texture = ExtResource("1_v8ri1")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -900,7 +900,7 @@ physics_layer_0/collision_mask = 8
 sources/0 = SubResource("TileSetAtlasSource_vu07q")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j8y5r"]
-texture = ExtResource("1_lwy2r")
+texture = ExtResource("1_v8ri1")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1601,10 +1601,10 @@ texture = ExtResource("1_lwy2r")
 sources/0 = SubResource("TileSetAtlasSource_j8y5r")
 
 [node name="SmallVillage" type="TileMapLayer" unique_id=2089022603]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 4, 0, 27, 0, 0, 0, 0, 0, 254, 255, 0, 0, 8, 0, 30, 0, 0, 0, 255, 255, 255, 255, 0, 0, 6, 0, 27, 0, 0, 0, 255, 255, 254, 255, 0, 0, 7, 0, 27, 0, 0, 0)
+tile_map_data = PackedByteArray("AAAAAP//AAAEAB4AAAD///7/AAAFABwAAAD+/wAAAAAGAB0AAAD//wAAAAAHABoAAAAAAAAAAAAHAB0AAAABAAAAAAAEABwAAAD+////AAARAAMAAAD/////AAARAAMAAAABAP//AAARAAMAAAABAP7/AAAEABsAAAA=")
 tile_set = SubResource("TileSet_kxf5l")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1602305832]
 show_behind_parent = true
-tile_map_data = PackedByteArray(0, 0, 255, 255, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray("AAD///7/AAAAAAAAAAD/////AAARAAMAAAAAAP//AAARAAMAAAAAAP7/AAAAAAAAAAD+//7/AAAAAAAAAAABAP7/AAAAAAAAAAABAP//AAARAAMAAAD+////AAARAAMAAAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_pkldr")

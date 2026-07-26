@@ -5,17 +5,13 @@ signal terrain_limits(top_left: Vector2, bottom_right: Vector2)
 var rng = RandomNumberGenerator.new()
 
 @export var noise = FastNoiseLite.new()
-@export var map_width: int = 50
-@export var map_height: int = 50
-@export var noise_scale: float = 0.1 
-@export var forest_threshold: float = -0.1
 
 @export var terrain: TileMapLayer
 @export var terrain_objects: TileMapLayer
 
 @export var max_object_size = 4
 @export var object_count = 10
-@export var min_object_distance := 10.0
+@export var min_object_distance = 10.0
 @export var hill_generation_probability: = 1
 @export var lake_generation_probability: = 0.5
 @export var settelment_generation_probability: = 0.1
@@ -32,11 +28,11 @@ func generate_seed():
 func create_base_terrain():
 	generate_seed()
 	terrain.clear()
-	for x in range(map_width):
-		for y in range(map_height):
-			var n2d = noise.get_noise_2d(x * noise_scale, y * noise_scale)
+	for x in range(settings.map_width):
+		for y in range(settings.map_height):
+			var n2d = noise.get_noise_2d(x * settings.noise_scale, y * settings.noise_scale)
 			terrain.set_cell(Vector2i(x,y), 0, Vector2i(0, 0))
-			if n2d < forest_threshold:
+			if n2d < settings.forest_threshold:
 				terrain_objects.set_cell(Vector2i(x,y), 0, Vector2i(8, 7))
 
 
@@ -67,8 +63,8 @@ func generate_map_object_locations() -> Array[Vector2i]:
 	var attempts := 0
 	while object_locations.size() < object_count and attempts < 1000:
 		var sample := Vector2i(
-			randi_range(max_object_size, map_width - max_object_size),
-			randi_range(max_object_size, map_height - max_object_size)
+			randi_range(max_object_size, settings.map_width - max_object_size),
+			randi_range(max_object_size, settings.map_height - max_object_size)
 		)
 
 		var valid := true

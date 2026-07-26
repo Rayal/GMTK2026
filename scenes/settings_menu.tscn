@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://cfmk3vudlcyfx"]
+
+[ext_resource type="Script" uid="uid://3nelruqk4s1k" path="res://scripts/settings_menu.gd" id="1_05p07"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_05p07"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_cr101"]
+
+[node name="SettingsMenu" type="Control" unique_id=1386742076]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_05p07")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2115953639]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=934943324]
+layout_mode = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=2113367408]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_05p07")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=2005741705]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer/VBoxContainer" unique_id=423146540]
+layout_mode = 2
+
+[node name="Map size label" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/CenterContainer" unique_id=430584902]
+layout_mode = 2
+text = "Map size"
+label_settings = SubResource("LabelSettings_cr101")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/VBoxContainer" unique_id=10129026]
+layout_mode = 2
+
+[node name="Map size value" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1703366102]
+layout_mode = 2
+
+[node name="MapSize" type="HSlider" parent="CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1671757756]
+layout_mode = 2
+min_value = 50.0
+max_value = 500.0
+value = 50.0
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1032635489]
+layout_mode = 2
+text = "1"
+
+[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1714348861]
+layout_mode = 2
+text = "Back"
+
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer/MapSize" to="." method="_on_map_size_value_changed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -1,9 +1,9 @@
-[gd_scene format=4 uid="uid://db7nufweokbmo"]
+[gd_scene format=4 uid="uid://bq3sbyohu0y3y"]
 
-[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="1_c7usa"]
+[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="1_jj20x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hbig6"]
-texture = ExtResource("1_c7usa")
+texture = ExtResource("1_jj20x")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -840,5 +840,5 @@ physics_layer_1/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_hbig6")
 
 [node name="l-lake" type="TileMapLayer" unique_id=217652771]
-tile_map_data = PackedByteArray("AAADAAAAAAAAAAoAAAADAAEAAAAAAAsAAAADAAIAAAAFAAoAAAAEAAIAAAAJAAoAAAAEAAQAAAAJAAwAAAAEAAMAAAAJAAsAAAAAAAMAAAAHAAoAAAAAAAQAAAAHAAwAAAABAAQAAAAIAAwAAAACAAQAAAAIAAwAAAADAAQAAAAIAAwAAAADAAMAAAAIAAsAAAACAAMAAAAIAAsAAAABAAMAAAAKAAwAAAABAAIAAAAHAAoAAAACAAIAAAAIAAoAAAA=")
+tile_map_data = PackedByteArray("AAD+//3/AAAHAAoAAAD///3/AAAIAAoAAAD+//7/AAAHAAsAAAD+////AAAHAAsAAAD+/wAAAAAHAAsAAAD+/wEAAAAHAAwAAAAAAP3/AAAIAAoAAAABAP3/AAAJAAoAAAD//wEAAAAIAAwAAAAAAAEAAAAJAAwAAAAAAAAAAAAJAAsAAAAAAP//AAALAAsAAAAAAP7/AAAIAAsAAAABAP7/AAAJAAsAAAABAP//AAAJAAwAAAD///7/AAAIAAsAAAD/////AAAIAAsAAAD//wAAAAAIAAsAAAA=")
 tile_set = SubResource("TileSet_pkldr")
