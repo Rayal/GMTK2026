@@ -271,10 +271,6 @@ scale = Vector2(0.99999994, 0.99999994)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_sc3pk")
-base_speed = null
-speed = null
-life_time_sec = null
-time_left_sec = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=972903980]
 texture_filter = 1
@@ -288,8 +284,8 @@ scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_inddr")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=830015993]
-collision_layer = 13
-collision_mask = 13
+collision_layer = 15
+collision_mask = 15
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=255828500]
 shape = SubResource("RectangleShape2D_inddr")

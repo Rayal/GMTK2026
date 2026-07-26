@@ -27,10 +27,6 @@ top_level = true
 position = Vector2(10000, 10000)
 scale = Vector2(5, 5)
 collision_layer = 2
-base_speed = 400
-speed = 0
-life_time_sec = 100
-time_left_sec = 0
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=508246576]
 
