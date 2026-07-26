@@ -10,7 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mnu")
-game_scene = "res://scenes/test_scene_1.tscn"
+game_scene = "res://scenes/test_scene_2.tscn"
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=2115953639]
 layout_mode = 1

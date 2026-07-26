@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://83vjv7mefbfm"]
+
+[ext_resource type="Script" uid="uid://dk3gjpwakmbdv" path="res://scripts/player.gd" id="1_ak18q"]
+[ext_resource type="PackedScene" uid="uid://k1mo6resen70" path="res://prefabs/player_alter.tscn" id="2_1s4s1"]
+
+[node name="Player2" type="Area2D" unique_id=155794638]
+scale = Vector2(5, 5)
+collision_layer = 3
+script = ExtResource("1_ak18q")
+metadata/_edit_group_ = true
+
+[node name="CharacterBody2D" parent="." unique_id=465320820 instance=ExtResource("2_1s4s1")]
+base_speed = null
+speed = null
+life_time_sec = null
+time_left_sec = null
