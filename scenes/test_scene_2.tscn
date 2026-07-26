@@ -18,8 +18,6 @@ shadow_color = Color(0, 0, 0, 0.9411765)
 script = ExtResource("1_jtlye")
 
 [node name="Terrain" parent="." unique_id=979663302 instance=ExtResource("2_vy022")]
-map_width = 250
-map_height = 250
 object_count = 100
 hill_generation_probability = 2
 settelment_generation_probability = 0.5

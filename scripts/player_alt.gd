@@ -163,6 +163,10 @@ func _on_terrain_terrain_limits(top_left: Vector2, bottom_right: Vector2) -> voi
 func _on_new_beacon(beacon: Beacon) -> void:
 	beacon.position = position
 	get_parent().add_child(beacon)
+	if not touching_mountain_tiles.is_empty():
+		beacon.set_z(4)
+	elif not touching_forest_tiles.is_empty():
+		beacon.set_z(1)
 	var notifier: VisibleOnScreenNotifier2D = beacon.get_node("VisibleOnScreenNotifier2D")
 	notifier.screen_entered.connect(_on_beacon_entered.bind(beacon))
 	notifier.screen_exited.connect(_on_beacon_exited.bind(beacon))

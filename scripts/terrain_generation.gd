@@ -88,10 +88,10 @@ func add_terrain_element(terrain_element: String, pos_vector: Vector2i):
 		element.set_global_position(terrain.map_to_local(pos_vector) - tile_size)
 		if terrain_element == "hills" or terrain_element == "lakes":
 			element.z_as_relative = false
-			element.z_index = 1
+			element.z_index = 3
 		elif terrain_element == "settlements":
 			element.z_as_relative = false
-			element.z_index = 2
+			element.z_index = 3
 		terrain_objects.add_child(element)
 
 
