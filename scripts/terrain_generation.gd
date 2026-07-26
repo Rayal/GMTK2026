@@ -9,12 +9,14 @@ var rng = RandomNumberGenerator.new()
 @export var terrain: TileMapLayer
 @export var terrain_objects: TileMapLayer
 
-@export var max_object_size = 4
-@export var object_count = 10
-@export var min_object_distance = 10.0
-@export var hill_generation_probability: = 1
-@export var lake_generation_probability: = 0.5
-@export var settelment_generation_probability: = 0.1
+var min_object_count = settings.map_width * settings.map_height / 500
+var max_object_count = settings.map_width * settings.map_height / 100
+var max_object_size = 4
+var min_object_distance = 10.0
+
+var hill_generation_probability = settings.hill_generation_probability
+var lake_generation_probability = settings.lake_generation_probability
+var settelment_generation_probability = settings.settelment_generation_probability
 
 func _ready() -> void:
 	create_base_terrain()
@@ -61,7 +63,7 @@ func create_objects_on_terrain():
 func generate_map_object_locations() -> Array[Vector2i]:
 	var object_locations: Array[Vector2i] = []
 	var attempts := 0
-	while object_locations.size() < object_count and attempts < 1000:
+	while object_locations.size() > max_object_count or (object_locations.size() < min_object_count and attempts < 100):
 		var sample := Vector2i(
 			randi_range(max_object_size, settings.map_width - max_object_size),
 			randi_range(max_object_size, settings.map_height - max_object_size)

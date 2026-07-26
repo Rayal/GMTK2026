@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://m80m2q35ndn0"]
+[gd_scene format=3 uid="uid://m80m2q35ndn0"]
 
 [ext_resource type="Script" uid="uid://crcg4h5hcms0" path="res://scripts/terrain_generation.gd" id="1_sjdqh"]
 [ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="2_sjdqh"]
@@ -1430,7 +1430,6 @@ terrain_objects = NodePath("TileMapLayerObjects")
 texture_filter = 1
 position = Vector2(-1, 1)
 scale = Vector2(5, 5)
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAADAAUAAAABAAEAAAADAAUAAAAAAAEAAAADAAUAAAACAAEAAAAIAAcAAAACAAIAAAAAAAAAAAADAAIAAAACAAYAAAADAAEAAAAIAAcAAAADAAAAAAAIAAcAAAACAAAAAAAIAAcAAAABAAIAAAAOAAYAAAAAAAIAAAADAAYAAAA=")
 tile_set = SubResource("TileSet_pkldr")
 
 [node name="TileMapLayerObjects" type="TileMapLayer" parent="." unique_id=518857739]

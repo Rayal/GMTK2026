@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://oi2g7pevxen1" path="res://scripts/main_menu.gd" id="1_mnu"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_05p07"]
+font_size = 40
+
 [node name="MainMenu" type="Control" unique_id=1386742076]
 layout_mode = 3
 anchors_preset = 15
@@ -27,6 +30,7 @@ alignment = 1
 [node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=2113367408]
 layout_mode = 2
 text = "GMTK2026"
+label_settings = SubResource("LabelSettings_05p07")
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1432095816]
