@@ -34,7 +34,7 @@ func _on_player_settlement_entered() -> void:
 
 func _on_settlement_choice_pressed(choice: int) -> void:
 	get_tree().paused = false
-	$Timer.start(30)
+	$Timer.start(20)
 	settlement_dialog.hide()
 	print("Settlement choice selected: ", choice)
 	upgrade_choice.emit(choice)

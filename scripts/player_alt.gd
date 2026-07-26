@@ -12,6 +12,7 @@ signal settlement_entered
 @export_range(0.1, 2.0, 0.1) var line_of_sight_modifier: float = 1.0
 @export_range(0.1, 2.0, 0.1) var forest_zoom: float = 1.5
 @export_range(0.1, 2.0, 0.1) var mountain_zoom: float = 0.5
+@export var beacon_number: int = 10
 
 var speed: int
 
@@ -47,6 +48,7 @@ func spec() -> void:
 	line_of_sight_modifier = randf_range(0.5, 1.5)
 	forest_zoom = randf_range(1.3, 1.7)
 	mountain_zoom = randf_range(0.3, 0.7)
+	beacon_number = 20
 	new_player = true
 
 
@@ -113,6 +115,9 @@ func process_movement(delta: float) -> void:
 func process_placement(_delta: float) -> void:
 	if player_dead:
 		return
+	if beacon_number <= 0:
+		return
+	
 	if ( Input.is_action_just_pressed("place_beacon") or
 		 Input.is_action_pressed("place_beacon")):
 		visualize_triangles = true
@@ -120,20 +125,14 @@ func process_placement(_delta: float) -> void:
 	elif Input.is_action_just_released("place_beacon"):
 		visualize_triangles = false;
 		new_beacon_request.emit()
+		beacon_number -= 1
 
 
 func _process(delta: float) -> void:
-	#if (Input.is_action_just_released("move_down") or
-		#Input.is_action_just_released("move_up") or
-		#Input.is_action_just_released("move_left") or
-		#Input.is_action_just_released("move_right")):
-			#print("P_p|Valid Beacons: ", valid_beacons)
 	process_life_timer(delta)
 	process_movement(delta)
 	process_placement(delta)
-
 	$Camera2D.zoom = $Camera2D.zoom.lerp(target_zoom * Vector2(1, 1), zoom_speed * delta)
-
 	queue_redraw()
 
 
@@ -165,6 +164,7 @@ func find_beacons():
 
 
 func _on_death_animation_finished() -> void:
+	print("Animation ended.")
 	player_died.emit()
 
 
@@ -174,7 +174,7 @@ func _on_terrain_terrain_limits(top_left: Vector2, bottom_right: Vector2) -> voi
 	$Camera2D.limit_right = bottom_right.x
 	$Camera2D.limit_left = top_left.x
 	$Camera2D.limit_top = top_left.y
-	position = (top_left + bottom_right) / 2
+	position = (top_left + bottom_right) / 2 + Vector2(0, 300)
 
 
 func _on_new_beacon(beacon: Beacon) -> void:
@@ -252,4 +252,5 @@ func _on_upgrade_choice(choice: int) -> void:
 	elif choice == 2:
 		mountain_zoom *= 0.5
 		mountain_speed_modifier *= 1.5
-	
+	elif choice == 3:
+		beacon_number += 20

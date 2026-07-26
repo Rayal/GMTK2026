@@ -18,6 +18,9 @@ var triangles: Dictionary[int, Triangle] = {}
 func _ready() -> void:
 	beacon_resource = load(beacon_asset_path)
 	triangle_resource = load(triangle_asset_path)
+
+
+func _process(delta: float) -> void:
 	update_labels()
 
 
@@ -27,7 +30,6 @@ func _on_new_beacon_request() -> void:
 	beacons[beacon.id] = beacon
 	new_beacon.emit(beacon)
 	beacon_number += 1
-	update_labels()
 
 
 func _on_triangle_request(beacon: Beacon, beacons: Array[Beacon]):
@@ -79,5 +81,6 @@ func create_triangle(beacons: Array[Beacon]):
 
 
 func update_labels():
-	$BeaconLabel.text = "Beacons Placed: " + str(beacon_number)
-	$TriangleLabel.text = "\nArea Mapped: " + str(area_mapped)
+	$BeaconLabel.text = "Beacons Owned: " + str(get_tree().current_scene.find_child("Player").beacon_number)
+	$BeaconLabel.text += "\rBeacons Placed: " + str(beacon_number)
+	$TriangleLabel.text = "\n\rArea Mapped: " + str(area_mapped)

@@ -38,19 +38,27 @@ func create_base_terrain():
 				terrain_objects.set_cell(Vector2i(x,y), 0, Vector2i(8, 7))
 
 
-func emit_limit():
+func get_terrain_limit() -> Array[Vector2]:
 	var rect = terrain.get_used_rect()
 	var tile_size = terrain.tile_set.tile_size
 	var top_left: Vector2 = terrain.to_global(rect.position * tile_size)
 	var bottom_right: Vector2 = terrain.to_global(rect.end * tile_size)
-	terrain_limits.emit(top_left, bottom_right)
+	return [top_left, bottom_right]
 
+func emit_limit() -> void:
+	var limits: Array[Vector2] = get_terrain_limit()
+	terrain_limits.emit(limits[0], limits[1])
 
 
 func create_objects_on_terrain():
 	var probability_sum = hill_generation_probability + lake_generation_probability + settelment_generation_probability
+	var limits: Array[Vector2] = get_terrain_limit()
+	var castle = load("res://assets/terrain/settelments/large_castle.tscn").instantiate()
+	castle.z_as_relative = false
+	castle.z_index = 3
+	terrain_objects.add_child(castle)
+	castle.set_global_position((limits[0] + limits[1]) / 2)
 	var object_locations = generate_map_object_locations()
-	print(object_locations)
 	for object_location in object_locations:
 		var rnd = randf_range(0, probability_sum)
 		if rnd <= hill_generation_probability:
