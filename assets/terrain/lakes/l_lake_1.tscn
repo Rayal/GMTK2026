@@ -1,9 +1,9 @@
-[gd_scene format=4 uid="uid://byuq2vdibw0gv"]
+[gd_scene format=4 uid="uid://b5uexy16dni5y"]
 
-[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="1_ntkex"]
+[ext_resource type="Texture2D" uid="uid://cti6bd6wma3rf" path="res://assets/terrain/punyworld-overworld-tileset.png" id="1_ir7xx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hbig6"]
-texture = ExtResource("1_ntkex")
+texture = ExtResource("1_ir7xx")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -841,5 +841,5 @@ sources/0 = SubResource("TileSetAtlasSource_hbig6")
 
 [node name="l-lake" type="TileMapLayer" unique_id=217652771]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAADAAAAAAAAAAoAAAADAAEAAAAAAAsAAAADAAIAAAAFAAoAAAAEAAIAAAAJAAoAAAAEAAQAAAAJAAwAAAAEAAMAAAAJAAsAAAAAAAMAAAAHAAoAAAAAAAQAAAAHAAwAAAABAAQAAAAIAAwAAAACAAQAAAAIAAwAAAADAAQAAAAIAAwAAAADAAMAAAAIAAsAAAACAAMAAAAIAAsAAAABAAMAAAAKAAwAAAABAAIAAAAHAAoAAAACAAIAAAAIAAoAAAA=")
+tile_map_data = PackedByteArray("AAADAAAAAAAJAAoAAAADAAEAAAAJAAsAAAADAAIAAAALAAoAAAAEAAIAAAAJAAoAAAAEAAQAAAAJAAwAAAAEAAMAAAAJAAsAAAAAAAMAAAAHAAoAAAAAAAQAAAAHAAwAAAABAAQAAAAIAAwAAAACAAQAAAAIAAwAAAADAAQAAAAIAAwAAAADAAMAAAAIAAsAAAACAAMAAAAIAAsAAAABAAMAAAAKAAwAAAABAAIAAAAHAAoAAAACAAIAAAAKAAoAAAABAAAAAAAHAAoAAAACAAAAAAAIAAoAAAABAAEAAAAHAAwAAAACAAEAAAAKAAsAAAA=")
 tile_set = SubResource("TileSet_pkldr")

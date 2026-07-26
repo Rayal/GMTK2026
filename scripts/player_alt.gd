@@ -34,15 +34,19 @@ var new_player: bool = true
 var player_dead: bool = false
 var time_start: int
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	size = $CollisionShape2D.shape.get_rect().size
 	speed = base_speed
 	time_left_sec = life_time_sec
 	$AnimatedSprite2D.play()
+	z_as_relative = false
+	z_index = 5
+
 
 func _physics_process(delta):
 	move_and_slide() 
+
 
 func process_life_timer(delta: float) -> void:
 	if player_dead:
@@ -100,12 +104,13 @@ func process_placement(delta: float) -> void:
 		visualize_triangles = false;
 		new_beacon_request.emit()
 
+
 func _process(delta: float) -> void:
-	if (Input.is_action_just_released("move_down") or
-		Input.is_action_just_released("move_up") or
-		Input.is_action_just_released("move_left") or
-		Input.is_action_just_released("move_right")):
-			print("P_p|Valid Beacons: ", valid_beacons)
+	#if (Input.is_action_just_released("move_down") or
+		#Input.is_action_just_released("move_up") or
+		#Input.is_action_just_released("move_left") or
+		#Input.is_action_just_released("move_right")):
+			#print("P_p|Valid Beacons: ", valid_beacons)
 	process_life_timer(delta)
 	process_movement(delta)
 	process_placement(delta)
@@ -119,7 +124,6 @@ func _draw() -> void:
 	if visualize_triangles:
 		for beacon in valid_beacons:
 			draw_line(Vector2.ZERO, to_local(beacon.global_position), Color.VIOLET)
-
 
 
 func player_death():
@@ -139,8 +143,6 @@ func find_beacons():
 			var collision_point: Vector2 = $BeaconCast.get_collision_point()
 			if collision_point.distance_to(beacon.global_position) < 1:
 				valid_beacons.append(beacon)
-			print("BC|Collision: ", collision_point)
-			print("Beacon position: ", beacon.global_position)
 		else:
 			valid_beacons.append(beacon)
 
@@ -155,6 +157,7 @@ func _on_terrain_terrain_limits(top_left: Vector2, bottom_right: Vector2) -> voi
 	$Camera2D.limit_right = bottom_right.x
 	$Camera2D.limit_left = top_left.x
 	$Camera2D.limit_top = top_left.y
+	position = (top_left + bottom_right) / 2
 
 
 func _on_new_beacon(beacon: Beacon) -> void:
@@ -168,12 +171,10 @@ func _on_new_beacon(beacon: Beacon) -> void:
 
 func _on_beacon_entered(beacon: Beacon):
 	beacons_on_screen.append(beacon)
-	print("Beacons on screen: ", beacons_on_screen)
 
 
 func _on_beacon_exited(beacon: Beacon):
 	beacons_on_screen.remove_at(beacons_on_screen.find(beacon))
-	print("Beacons on screen: ", beacons_on_screen)
 
 
 func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
@@ -208,17 +209,15 @@ func _on_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, l
 		else:
 			pass
 
+
 func in_forest():
 	speed = forest_speed
 	target_zoom = max_zoom
 
+
 func in_mountains():
 	speed = mountain_speed
 	target_zoom = min_zoom
-
-
-func _on_beacon_control_new_beacon(beacon: Beacon) -> void:
-	_on_new_beacon(beacon)
 
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:

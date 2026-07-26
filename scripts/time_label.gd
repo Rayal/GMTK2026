@@ -11,4 +11,4 @@ func _process(delta: float) -> void:
 	update_label()
 
 func update_label():
-	$Label.text = "Time left: " + str(get_parent().get_parent().find_child("CharacterBody2D").time_left_sec)
+	$Label.text = "Time left: " + str(get_tree().current_scene.find_child("Player").time_left_sec)

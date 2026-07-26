@@ -18,12 +18,21 @@ shadow_color = Color(0, 0, 0, 0.9411765)
 script = ExtResource("1_jtlye")
 
 [node name="Terrain" parent="." unique_id=979663302 instance=ExtResource("2_vy022")]
+map_width = 250
+map_height = 250
+object_count = 100
+hill_generation_probability = 2
+settelment_generation_probability = 0.5
 
-[node name="CharacterBody2D" parent="." unique_id=465320820 instance=ExtResource("3_jinhd")]
+[node name="Player" parent="." unique_id=465320820 instance=ExtResource("3_jinhd")]
 top_level = true
-position = Vector2(7.6293945e-06, 7.6293945e-06)
+position = Vector2(10000, 10000)
 scale = Vector2(5, 5)
 collision_layer = 2
+base_speed = 400
+speed = 0
+life_time_sec = 100
+time_left_sec = 0
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=508246576]
 
@@ -55,10 +64,10 @@ ok_button_text = "Restart"
 dialog_text = "Your play time has run out."
 cancel_button_text = "Quit"
 
-[connection signal="terrain_limits" from="Terrain" to="CharacterBody2D" method="_on_terrain_terrain_limits"]
-[connection signal="new_beacon_request" from="CharacterBody2D" to="HUD/BeaconControl" method="_on_character_body_2d_new_beacon_request"]
-[connection signal="player_died" from="CharacterBody2D" to="CharacterBody2D" method="_on_player_died"]
-[connection signal="triangles_request" from="CharacterBody2D" to="HUD/BeaconControl" method="_on_character_body_2d_triangles_request"]
-[connection signal="new_beacon" from="HUD/BeaconControl" to="CharacterBody2D" method="_on_beacon_control_new_beacon"]
+[connection signal="terrain_limits" from="Terrain" to="Player" method="_on_terrain_terrain_limits"]
+[connection signal="new_beacon_request" from="Player" to="HUD/BeaconControl" method="_on_new_beacon_request"]
+[connection signal="player_died" from="Player" to="Player" method="_on_player_died"]
+[connection signal="triangles_request" from="Player" to="HUD/BeaconControl" method="_on_triangle_request"]
+[connection signal="new_beacon" from="HUD/BeaconControl" to="Player" method="_on_new_beacon"]
 [connection signal="canceled" from="DeathDialog" to="." method="_on_death_dialog_canceled"]
 [connection signal="confirmed" from="DeathDialog" to="." method="_on_death_dialog_confirmed"]

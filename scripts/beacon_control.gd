@@ -81,11 +81,3 @@ func create_triangle(beacons: Array[Beacon]):
 func update_labels():
 	$BeaconLabel.text = "Beacons Placed: " + str(beacon_number)
 	$TriangleLabel.text = "\nArea Mapped: " + str(area_mapped)
-
-
-func _on_character_body_2d_new_beacon_request() -> void:
-	pass # Replace with function body.
-
-
-func _on_character_body_2d_triangles_request(beacon: Beacon, beacons: Array[Beacon]) -> void:
-	pass # Replace with function body.
