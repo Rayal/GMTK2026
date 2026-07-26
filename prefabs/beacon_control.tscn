@@ -13,9 +13,6 @@ shadow_color = Color(0, 0, 0, 0.9411765)
 [node name="BeaconControl" type="Node2D" unique_id=1891820081]
 texture_filter = 1
 script = ExtResource("1_oyos7")
-beacon_number = null
-triangle_number = null
-area_mapped = null
 beacon_asset_path = "res://prefabs/beacon.tscn"
 triangle_asset_path = "res://prefabs/triangle.tscn"
 

@@ -1,25 +1,26 @@
-extends CharacterBody2D
+[gd_scene format=3 uid="uid://83vjv7mefbfm"]
+
+[ext_resource type="PackedScene" uid="uid://k1mo6resen70" path="res://prefabs/player_alter.tscn" id="2_1s4s1"]
+
+[sub_resource type="GDScript" id="GDScript_ovp0n"]
+script/source = "extends Area2D
 
 signal new_beacon_request
 signal triangles_request(beacon: Beacon, beacons: Array[Beacon])
 signal player_died
-signal settlement_entered
 
-@export var life_time_sec: int = 100
 @export var base_speed: int = 400
-@export_range(0.1, 1.0, 0.1) var forest_speed_modifier : float = 0.5
-@export_range(0.1, 1.0, 0.1) var mountain_speed_modifier : float = 0.25
-@export_range(0.1, 2.0, 0.1) var line_of_sight_modifier: float = 1.0
-@export_range(0.1, 2.0, 0.1) var forest_zoom: float = 1.5
-@export_range(0.1, 2.0, 0.1) var mountain_zoom: float = 0.5
-@export var beacon_number: int = 10
-
-var speed: int
+@export var speed: int
+var forest_speed = base_speed / 2
+var mountain_speed = base_speed / 4
 
 var zoom_speed: float = 2.0
-var target_zoom: float = line_of_sight_modifier
+var norm_zoom: float = 1
+var min_zoom: float = 0.5
+var max_zoom: float = 1.5
+var target_zoom: float = norm_zoom
 
-
+@export var life_time_sec: int = 100
 @export var time_left_sec: int
 
 var screen_size
@@ -27,7 +28,6 @@ var size: Vector2
 
 
 var touching_forest_tiles: Array = []
-var touching_settlement_tiles: Array = []
 var touching_mountain_tiles: Array = []
 
 var beacons_on_screen: Array[Beacon] = []
@@ -39,61 +39,39 @@ var new_player: bool = true
 var player_dead: bool = false
 var time_start: int
 
-
-func spec() -> void:
-	life_time_sec *= randf_range(0.5, 1.5)
-	base_speed *= randf_range(0.5, 1.5)
-	forest_speed_modifier = randf_range(0.4, 0.6)
-	mountain_speed_modifier = randf_range(0.2, 0.4)
-	line_of_sight_modifier = randf_range(0.5, 1.5)
-	forest_zoom = randf_range(1.3, 1.7)
-	mountain_zoom = randf_range(0.3, 0.7)
-	beacon_number = 20
-	new_player = true
-
-
-
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	size = $CollisionShape2D.shape.get_rect().size
-	spec()
 	speed = base_speed
 	time_left_sec = life_time_sec
 	$AnimatedSprite2D.play()
 	z_as_relative = false
 	z_index = 5
-	
-	$AudioStreamPlayer.stream = ResourceLoader.load("res://assets/sound/digital_footstep_grass_3.wav")
 
-
-func _physics_process(_delta):
-	move_and_slide() 
-
-
-func _timer_ended():
-	player_death()
-
-
-func process_life_timer(_delta: float) -> void:
+func process_life_timer(delta: float) -> void:
 	if player_dead:
 		return
 	if new_player and Input.is_anything_pressed():
 		new_player = false
-		$Timer.start(life_time_sec)
-	else:
-		time_left_sec = $Timer.time_left
+		time_start = Time.get_ticks_msec()
+	elif not new_player:
+		var ellapsed: int = (Time.get_ticks_msec() - time_start) / 1000
+		time_left_sec = life_time_sec - ellapsed
+		if time_left_sec <= 0:
+			player_death()
 
 
 func process_movement(delta: float) -> void:
 	if player_dead:
 		return
 	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("move_right"):
+	if Input.is_action_pressed(\"move_right\"):
 		velocity.x += 1
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed(\"move_left\"):
 		velocity.x -= 1
-	if Input.is_action_pressed("move_down"):
+	if Input.is_action_pressed(\"move_down\"):
 		velocity.y += 1
-	if Input.is_action_pressed("move_up"):
+	if Input.is_action_pressed(\"move_up\"):
 		velocity.y -= 1
 	
 	if velocity.length() > 0:
@@ -103,45 +81,42 @@ func process_movement(delta: float) -> void:
 	position = position.clamp(Vector2.ZERO + size, screen_size - size)
 	
 	if velocity.x != 0:
-		$AnimatedSprite2D.animation = "walk_side"
+		$AnimatedSprite2D.animation = \"walk_side\"
 		$AnimatedSprite2D.flip_h = velocity.x < 0
 	elif velocity.y > 0:
 		$AnimatedSprite2D.flip_h = false
-		$AnimatedSprite2D.animation = "walk_front"
+		$AnimatedSprite2D.animation = \"walk_front\"
 	elif velocity.y < 0:
 		$AnimatedSprite2D.flip_h = false
-		$AnimatedSprite2D.animation = "walk_back"
+		$AnimatedSprite2D.animation = \"walk_back\"
 	else:
-		$AnimatedSprite2D.animation = "idle" + $AnimatedSprite2D.animation.erase(0, 4)
+		$AnimatedSprite2D.animation = \"idle\" + $AnimatedSprite2D.animation.erase(0, 4)
 
 
-func process_placement(_delta: float) -> void:
+func process_placement(delta: float) -> void:
 	if player_dead:
 		return
-	if beacon_number <= 0:
-		return
-	
-	if ( Input.is_action_just_pressed("place_beacon") or
-		 Input.is_action_pressed("place_beacon")):
+	if ( Input.is_action_just_pressed(\"place_beacon\") or
+		 Input.is_action_pressed(\"place_beacon\")):
 		visualize_triangles = true
 		find_beacons()
-		$PlaceBeacon.play()
-	elif Input.is_action_just_released("place_beacon"):
+	elif Input.is_action_just_released(\"place_beacon\"):
 		visualize_triangles = false;
 		new_beacon_request.emit()
-		beacon_number -= 1
-
-func play_sound() -> void:
-	if not $AudioStreamPlayer.playing:
-		$AudioStreamPlayer.play()
 
 func _process(delta: float) -> void:
+	if (Input.is_action_just_released(\"move_down\") or
+		Input.is_action_just_released(\"move_up\") or
+		Input.is_action_just_released(\"move_left\") or
+		Input.is_action_just_released(\"move_right\")):
+			print(\"P_p|Valid Beacons: \", valid_beacons)
 	process_life_timer(delta)
 	process_movement(delta)
 	process_placement(delta)
-	queue_redraw()
-	play_sound()
+
 	$Camera2D.zoom = $Camera2D.zoom.lerp(target_zoom * Vector2(1, 1), zoom_speed * delta)
+
+	queue_redraw()
 
 
 func _draw() -> void:
@@ -150,9 +125,10 @@ func _draw() -> void:
 			draw_line(Vector2.ZERO, to_local(beacon.global_position), Color.VIOLET)
 
 
+
 func player_death():
 	player_dead = true
-	$AnimatedSprite2D.animation = "die" + $AnimatedSprite2D.animation.erase(0, 4)
+	$AnimatedSprite2D.animation = \"die\" + $AnimatedSprite2D.animation.erase(0, 4)
 	$AnimatedSprite2D.animation_finished.connect(_on_death_animation_finished, CONNECT_ONE_SHOT)
 
 
@@ -167,12 +143,13 @@ func find_beacons():
 			var collision_point: Vector2 = $BeaconCast.get_collision_point()
 			if collision_point.distance_to(beacon.global_position) < 1:
 				valid_beacons.append(beacon)
+			print(\"BC|Collision: \", collision_point)
+			print(\"Beacon position: \", beacon.global_position)
 		else:
 			valid_beacons.append(beacon)
 
 
 func _on_death_animation_finished() -> void:
-	print("Animation ended.")
 	player_died.emit()
 
 
@@ -182,17 +159,12 @@ func _on_terrain_terrain_limits(top_left: Vector2, bottom_right: Vector2) -> voi
 	$Camera2D.limit_right = bottom_right.x
 	$Camera2D.limit_left = top_left.x
 	$Camera2D.limit_top = top_left.y
-	position = (top_left + bottom_right) / 2 + Vector2(0, 300)
 
 
 func _on_new_beacon(beacon: Beacon) -> void:
 	beacon.position = position
 	get_parent().add_child(beacon)
-	if not touching_mountain_tiles.is_empty():
-		beacon.set_z(4)
-	elif not touching_forest_tiles.is_empty():
-		beacon.set_z(1)
-	var notifier: VisibleOnScreenNotifier2D = beacon.get_node("VisibleOnScreenNotifier2D")
+	var notifier: VisibleOnScreenNotifier2D = beacon.get_node(\"VisibleOnScreenNotifier2D\")
 	notifier.screen_entered.connect(_on_beacon_entered.bind(beacon))
 	notifier.screen_exited.connect(_on_beacon_exited.bind(beacon))
 	if valid_beacons.size() >= 2:
@@ -200,66 +172,62 @@ func _on_new_beacon(beacon: Beacon) -> void:
 
 func _on_beacon_entered(beacon: Beacon):
 	beacons_on_screen.append(beacon)
+	print(\"Beacons on screen: \", beacons_on_screen)
 
 
 func _on_beacon_exited(beacon: Beacon):
 	beacons_on_screen.remove_at(beacons_on_screen.find(beacon))
+	print(\"Beacons on screen: \", beacons_on_screen)
 
 
-func in_forest():
-	speed = base_speed * forest_speed_modifier
-	target_zoom = line_of_sight_modifier * forest_zoom
-	$AudioStreamPlayer.stream = ResourceLoader.load("res://assets/sound/digital_footstep_snow_1.wav")
-
-func in_mountains():
-	speed = base_speed * mountain_speed_modifier
-	target_zoom = line_of_sight_modifier * mountain_zoom
-	$AudioStreamPlayer.stream = ResourceLoader.load("res://assets/sound/digital_footstep_gravel_3.wav")
-
-func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body is TileMapLayer:
 		var col_layer = PhysicsServer2D.body_get_collision_layer(body_rid)
 		if col_layer == 1:
 			touching_mountain_tiles.append(body_rid)
-		elif col_layer == 4:
-			if touching_settlement_tiles.is_empty():
-				settlement_entered.emit()
-			touching_settlement_tiles.append(body_rid)
 		elif col_layer == 8:
 			touching_forest_tiles.append(body_rid)
+		else:
+			pass
 		if not touching_mountain_tiles.is_empty():
 			in_mountains()
 		elif not touching_forest_tiles.is_empty():
 			in_forest()
+	
 
-
-func _on_area_2d_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+func _on_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body is TileMapLayer:
 		var col_layer = PhysicsServer2D.body_get_collision_layer(body_rid)
 		if col_layer == 1:
 			touching_mountain_tiles.erase(body_rid)
-		elif col_layer == 4:
-			touching_settlement_tiles.erase(body_rid)
 		elif col_layer == 8:
 			touching_forest_tiles.erase(body_rid)
 		if touching_mountain_tiles.is_empty() and touching_forest_tiles.is_empty():
 			speed = base_speed
-			target_zoom = line_of_sight_modifier
-			$AudioStreamPlayer.stream = ResourceLoader.load("res://assets/sound/digital_footstep_grass_3.wav")
+			target_zoom = norm_zoom
 		elif not touching_mountain_tiles.is_empty():
 			in_mountains()
 		elif touching_mountain_tiles.is_empty() and not touching_forest_tiles.is_empty():
 			in_forest()
+		else:
+			pass
 
+func in_forest():
+	speed = forest_speed
+	target_zoom = max_zoom
 
-func _on_upgrade_choice(choice: int) -> void:
-	if choice == 0:
-		spec()
-	elif choice == 1:
-		forest_zoom *= 0.5
-		forest_speed_modifier *= 1.5
-	elif choice == 2:
-		mountain_zoom *= 0.5
-		mountain_speed_modifier *= 1.5
-	elif choice == 3:
-		beacon_number += 20
+func in_mountains():
+	speed = mountain_speed
+	target_zoom = min_zoom
+"
+
+[node name="Player2" type="Area2D" unique_id=155794638]
+scale = Vector2(5, 5)
+collision_layer = 3
+script = SubResource("GDScript_ovp0n")
+metadata/_edit_group_ = true
+
+[node name="CharacterBody2D" parent="." unique_id=465320820 instance=ExtResource("2_1s4s1")]
+life_time_sec = 100
+base_speed = 400
+time_left_sec = 0

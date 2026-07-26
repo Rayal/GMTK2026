@@ -305,6 +305,7 @@ hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1942839042]
 stream = ExtResource("5_14na2")
 volume_db = -6.228
@@ -313,5 +314,10 @@ bus = &"Delay"
 [node name="PlaceBeacon" type="AudioStreamPlayer" parent="." unique_id=41543067]
 stream = ExtResource("6_1rn14")
 
+[node name="Timer" type="Timer" parent="." unique_id=1921486281]
+one_shot = true
+
+
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
 [connection signal="body_shape_exited" from="Area2D" to="." method="_on_area_2d_body_shape_exited"]
+[connection signal="timeout" from="Timer" to="." method="_timer_ended"]
